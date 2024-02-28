@@ -1,3 +1,4 @@
+package Application;
 import java.util.Date;
 
 public class TrainingBooking {
