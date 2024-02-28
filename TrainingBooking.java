@@ -3,16 +3,16 @@ import java.util.Date;
 public class TrainingBooking {
 
     private Date date;
-    private Teacher teacher;
+    private int teacherID;
     private String trainingSubject;
 
     public Date getDate(){return date;}
-    public Teacher getTeacher(){return teacher;}
+    public int getTeacher(){return teacherID;}
     public String getTrainingSubject(){return trainingSubject;}
 
-    public TrainingBooking (Date date, Teacher teach, String subject){
+    public TrainingBooking (Date date, int teach, String subject){
         this.date = date;
-        this.teacher = teach;
+        this.teacherID = teach;
         this.trainingSubject = subject;
     }
     

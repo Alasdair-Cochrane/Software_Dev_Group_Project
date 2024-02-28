@@ -1,12 +1,6 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicationMain {
-
-    public List<Teacher> teachers;
-    public List<Requirement> requirements;
-    public List<TrainingBooking> bookings;
-
 
     public List<Teacher> findAvailableTeacher(Requirement req){
         return null;
@@ -26,13 +20,5 @@ public class ApplicationMain {
     public void organiseTraining(Teacher teacher){
 
     }
-
-    public ApplicationMain(){
-        teachers = new ArrayList<>();
-        requirements = new ArrayList<>();
-        bookings = new ArrayList<>();
-    }
-    
-
     
 }
