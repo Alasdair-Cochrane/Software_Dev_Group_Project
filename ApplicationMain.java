@@ -2,6 +2,8 @@ import java.util.List;
 
 public class ApplicationMain {
 
+    DataStore store;
+    
     public List<Teacher> findAvailableTeacher(Requirement req){
         return null;
     }

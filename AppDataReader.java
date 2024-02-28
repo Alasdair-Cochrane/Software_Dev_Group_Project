@@ -1,6 +1,6 @@
 public interface AppDataReader {
 
-    public Object readFileToObject();
-    
+    public <T> T readFileToObject();
+    public Boolean hasNext();  
     
 }

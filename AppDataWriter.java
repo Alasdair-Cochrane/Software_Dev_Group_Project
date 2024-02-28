@@ -1,6 +1,7 @@
 public interface AppDataWriter {
 
-    public void writeObjectToFile();    
+    public <T> void writeObject(T object);   
+
 } 
     
 

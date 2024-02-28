@@ -1,10 +1,11 @@
 // Recieves an object and writes its instance variables to a text string//
+//Uses reflection//
 
 import java.lang.reflect.*;
 
-public class ObjectWriter {
+public class ReflectionWriter implements AppDataWriter {
 
- public static String writeObject(Object t)
+ public <T> void writeObject(T t)
  {
     String output = t.getClass().getName();
     output += "/";
@@ -29,7 +30,7 @@ public class ObjectWriter {
     output += ",";  
     }
     output += "\n";
-    return output;
+    System.out.println(output);
  }
 
 
