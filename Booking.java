@@ -1,6 +1,6 @@
 import java.util.Date;
 
-public class TrainingBooking {
+public class Booking {
 
     private Date date;
     private int teacherID;
@@ -10,7 +10,7 @@ public class TrainingBooking {
     public int getTeacher(){return teacherID;}
     public String getTrainingSubject(){return trainingSubject;}
 
-    public TrainingBooking (Date date, int teach, String subject){
+    public Booking (Date date, int teach, String subject){
         this.date = date;
         this.teacherID = teach;
         this.trainingSubject = subject;

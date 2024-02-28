@@ -1,5 +1,5 @@
-// Recieves an object and writes its instance variables to a text string//
-//Uses reflection//
+//example of a different way to parse objects into a text file implementing the interface//
+// Recieves an object and writes its instance variables to a text string using reflection//
 
 import java.lang.reflect.*;
 

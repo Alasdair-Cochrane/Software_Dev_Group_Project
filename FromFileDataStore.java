@@ -1,8 +1,11 @@
-import java.io.FileReader;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+The datasource we are using in our implementation that loads all objects from the file into memory 
+(in the form of lists for each object type)
+Uses reader / writer types to load or save each file entry
+*/
 public class FromFileDataStore implements DataStore{
 
     private String filePath;
@@ -10,24 +13,14 @@ public class FromFileDataStore implements DataStore{
 
     private List<Teacher> teachers;
     private List<Requirement> requirements;
-    private List<TrainingBooking> bookings;
+    private List<Booking> bookings;
 
     AppDataReader reader;
     AppDataWriter writer;
 
     public List<Teacher> getAllTeachers() {return teachers;}
     public List<Requirement> getAllRequirements() {return requirements;}
-    public List<TrainingBooking> getAllBookings() {return bookings;}
-
-
-    public Boolean validateFilePath(){
-        try (FileReader fr = new FileReader(filePath)) {
-            return true;            
-        } catch (IOException e) {
-            return false;
-        }
-    }
-
+    public List<Booking> getAllBookings() {return bookings;}
 
     public void loadAll() {
         
@@ -56,7 +49,7 @@ public class FromFileDataStore implements DataStore{
         return false;
     }
     @Override
-    public Boolean addBooking(TrainingBooking tb) {
+    public Boolean addBooking(Booking tb) {
         if(!bookings.contains(tb)){
             bookings.add(tb);
             return true;
@@ -83,7 +76,7 @@ public class FromFileDataStore implements DataStore{
         return false;
     }
 
-    public Boolean removeBooking(TrainingBooking b) {
+    public Boolean removeBooking(Booking b) {
         if(bookings.contains(b)){
             bookings.remove(b);
             return true;
@@ -105,21 +98,7 @@ public class FromFileDataStore implements DataStore{
         reader = new CSVReader(filePath);
         writer = new CSVWriter(filePath);
     }
-    @Override
-    public Teacher getTeacherByid(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTeacherByid'");
-    }
-    @Override
-    public Requirement getRequirementByID(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRequirementByID'");
-    }
-    @Override
-    public TrainingBooking getBookingByID(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getBookingByID'");
-    }
+
     
 
     
