@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
-import Application.Models.Contracts.DataStorageInterface;
+import Application.Teacher;
+import Application.CSV.Contracts.DataStorageInterface;
 
 public class TeacherStorage implements DataStorageInterface<Teacher> {
 	String path;
