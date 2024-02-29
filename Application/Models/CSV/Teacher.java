@@ -1,24 +1,22 @@
 
 package Application.Models.CSV;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.File;
 import java.util.List;
-import java.util.Scanner;
 
 import Application.Models.Contracts.DataStorageInterface;
 
-public class Teacher implements DataStorageInterface {
+public class Teacher implements DataStorageInterface<Teacher> {
 
     private int id;
-    private int toatlEntry;
     private String name;
     private String specialisations;
+    private FileIO database;
 
     public Teacher(String name, String specialisation) {
         this.name = name;
         this.specialisations = specialisation;
+        this.database = new FileIO(this.getClass().getSimpleName());
     }
     public Teacher(int id, String name, String specialisation) {
         this.name = name;
@@ -39,39 +37,34 @@ public class Teacher implements DataStorageInterface {
     public void setId(int id) {
         this.id = id;
     }
-    @Override
-    public Object read(int id) {
-		try (
-				BufferedReader br = new BufferedReader(new FileReader(path));
-				Scanner scanner = new Scanner(br);) {
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		// TODO
-		throw new UnsupportedOperationException("Unimplemented method 'read'");
-
-    }
-    @Override
-    public List<Teacher> getAll() {
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
-    }
-    @Override
-    public void save() {
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
-    }
-    @Override
-    public void update(Object data) {
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
-    @Override
-    public void delete(int id) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-    @Override
-    public void delete(Object data) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-
+	@Override
+	public Teacher get(int id) {
+		throw new UnsupportedOperationException("Unimplemented method 'get'");
+	}
+	@Override
+	public List<Teacher> getAll() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+	}
+	@Override
+	public void save() {
+        database.createFileIfNotExists();
+	}
+	@Override
+	public void update(Teacher data) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'update'");
+	}
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'delete'");
+	}
+	@Override
+	public void delete(Teacher data) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'delete'");
+	}
     
 
     //Keeping simple, this needs to be its own table if multiple allowed
