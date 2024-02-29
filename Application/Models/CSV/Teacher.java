@@ -11,12 +11,15 @@ public class Teacher implements DataStorageInterface<Teacher> {
     private int id;
     private String name;
     private String specialisations;
-    private FileIO database;
+    private Database database;
 
+    public Teacher() {
+
+    }
     public Teacher(String name, String specialisation) {
         this.name = name;
         this.specialisations = specialisation;
-        this.database = new FileIO(this.getClass().getSimpleName());
+        this.database = new Database(this.getClass().getSimpleName());
     }
     public Teacher(int id, String name, String specialisation) {
         this.name = name;
@@ -37,6 +40,7 @@ public class Teacher implements DataStorageInterface<Teacher> {
     public void setId(int id) {
         this.id = id;
     }
+    
 	@Override
 	public Teacher get(int id) {
 		throw new UnsupportedOperationException("Unimplemented method 'get'");

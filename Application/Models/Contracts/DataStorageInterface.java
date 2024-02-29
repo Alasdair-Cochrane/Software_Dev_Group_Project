@@ -20,4 +20,5 @@ public interface DataStorageInterface<T> {
 
     // delete an object
     public void delete(T data);
+
 }

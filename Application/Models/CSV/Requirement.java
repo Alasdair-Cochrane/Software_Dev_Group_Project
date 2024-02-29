@@ -10,14 +10,15 @@ public class Requirement implements DataStorageInterface<Requirement> {
     private String subject;
     private int hours;
     private int minimumExperience;
-    private FileIO database;
+    private Database database;
 
+    public Requirement() {}
     public Requirement(String subject, int numHours, int experience) {
 
         this.subject = subject;
         this.hours = numHours;
         this.minimumExperience = experience;
-        this.database = new FileIO(this.getClass().getSimpleName());
+        this.database = new Database(this.getClass().getSimpleName());
     
     }
 
