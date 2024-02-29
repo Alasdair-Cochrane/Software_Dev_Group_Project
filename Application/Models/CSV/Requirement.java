@@ -1,40 +1,32 @@
 package Application.Models.CSV;
 
+import Application.Models.Contracts.DataStorageInterface;
 
+public class Requirement implements DataStorageInterface{
 
-    private
-    tic int idCount
+    private int id;
+    private String subject;
+    private int hours;
+    private int minimumExperience;
 
-    ate String subject
+    public int getId() {return id; }
+    public String getSubject() {return subject;}
+    public int getHours() {return hours;}
+    public int getMinimumExperience() { return minimumExperience; }
 
-    int minim 
-    i
-
-    
-
-    i
-
-    
-
-    i
-
-    
-
-    irn m
-
-    ic Requirement(String subject, int numHours, int experience) {
+    public Requirement(String subject, int numHours, int experience) {
 
         this.subject = subject;
         this.hours = numHours;
-        t
-
-    
-
+        this.minimumExperience = experience;
+        this.id = idCounter++;
+    }
     public Requirement(int id, String subject, int numHours, int experience) {
 
         this.subject = subject;
         this.hours = numHours;
-     
+        this.minimumExperience = experience;
+        this.id = id;
+    }
 
-        }
-
+}
