@@ -3,6 +3,7 @@ package Application.Models.CSV;
 
 public class Teacher {
 
+    private static int idCounter;
     private int id;
     private String name;
     private String specialisations;
@@ -25,14 +26,19 @@ public class Teacher {
             return;
         }
         specialisations += ", " + special;
+    }
+
+    public Teacher(String name, String specialisation) {
+        this.name = name;
+        this.specialisations = specialisation;
+        id = idCounter++;
 
     }
 
     public Teacher(int id, String name, String specialisation) {
         this.name = name;
-        this.id = id;
         this.specialisations = specialisation;
-
+        this.id = id;
     }
 
 }

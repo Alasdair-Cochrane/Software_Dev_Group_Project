@@ -1,25 +1,40 @@
 package Application.Models.CSV;
 
-public class Requirement {
 
-    private int id;
-    private String subject;
-    private int hours;
-    private int minimumExperience;
 
-    public int getId() {
-        return id;
-    }
+    private
+    tic int idCount
 
-    public String getSubject() {
-        return subject;
-    }
+    ate String subject
 
-    public int getHours() {
-        return hours;
-    }
+    int minim 
+    i
 
-    public int getMinimumExperience() {
-        return minimumExperience;
-    }
-}
+    
+
+    i
+
+    
+
+    i
+
+    
+
+    irn m
+
+    ic Requirement(String subject, int numHours, int experience) {
+
+        this.subject = subject;
+        this.hours = numHours;
+        t
+
+    
+
+    public Requirement(int id, String subject, int numHours, int experience) {
+
+        this.subject = subject;
+        this.hours = numHours;
+     
+
+        }
+
