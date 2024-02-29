@@ -6,22 +6,23 @@ import java.util.List;
 
 import Application.Models.Contracts.DataStorageInterface;
 
-public class Teacher implements DataStorageInterface<Teacher> {
+public final class Teacher implements DataStorageInterface<Teacher> {
 
+    private final static String errorMessage ="Not instantiated or not in the database"; 
     private int id;
     private String name;
     private String speciality;
     private Database database;
-    ArrayList<String> data;
+    List<String> data;
 
     public Teacher() {
 
     }
     public Teacher(String name, String specialisation) {
-        this.data =new ArrayList<>();
+        this.data = new ArrayList<>();
         this.name = name;
         this.speciality = specialisation;
-        this.database = new Database(this.getClass().getSimpleName());
+        this.database = new Database(this);
     }
     public Teacher(int id, String name, String specialisation) {
         this.name = name;
@@ -29,15 +30,24 @@ public class Teacher implements DataStorageInterface<Teacher> {
         this.id = id;
     }
     public String getName() {
-        return name;
+        if (this.name == null) {
+            return errorMessage;
+        }
+        return this.name;
     }
 
     public int getId() {
+        if (id == 0) {
+            return 0;
+        }
         return id;
     }
 
     public String getSpeciality() {
-        return speciality;
+        if (this.speciality == null) {
+            return errorMessage;
+        }
+        return this.speciality;
     }
     public void setId(int id) {
         this.id = id;
@@ -57,8 +67,13 @@ public class Teacher implements DataStorageInterface<Teacher> {
     
 	@Override
 	public Teacher get(int id) {
-		throw new UnsupportedOperationException("Unimplemented method 'get'");
+       List<String> result = database.retrieve(id);
+       this.id = Integer.parseInt(result.get(0));
+       this.name = result.get(1);
+       this.speciality = result.get(2);
+       return this;
 	}
+
 	@Override
 	public List<Teacher> getAll() {
 		// TODO Auto-generated method stub
@@ -67,7 +82,7 @@ public class Teacher implements DataStorageInterface<Teacher> {
 	@Override
 	public void save() {
         prepareData();
-        database.write(data);
+        database.add(data);
         
 	}
 	@Override
@@ -77,13 +92,20 @@ public class Teacher implements DataStorageInterface<Teacher> {
 	}
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        database.delete(id);
 	}
 	@Override
 	public void delete(Teacher data) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        if (data.getId() != 0) {
+            delete(data.getId());
+        }
+	}
+
+	@Override
+	public void delete() {
+        if (this.getId() != 0) {
+            delete(this.getId());
+        }
 	}
     
 
