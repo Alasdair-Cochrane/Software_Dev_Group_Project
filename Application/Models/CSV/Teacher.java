@@ -1,7 +1,7 @@
 
 package Application.Models.CSV;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import Application.Models.Contracts.DataStorageInterface;
@@ -10,20 +10,22 @@ public class Teacher implements DataStorageInterface<Teacher> {
 
     private int id;
     private String name;
-    private String specialisations;
+    private String speciality;
     private Database database;
+    ArrayList<String> data;
 
     public Teacher() {
 
     }
     public Teacher(String name, String specialisation) {
+        this.data =new ArrayList<>();
         this.name = name;
-        this.specialisations = specialisation;
+        this.speciality = specialisation;
         this.database = new Database(this.getClass().getSimpleName());
     }
     public Teacher(int id, String name, String specialisation) {
         this.name = name;
-        this.specialisations = specialisation;
+        this.speciality = specialisation;
         this.id = id;
     }
     public String getName() {
@@ -34,11 +36,23 @@ public class Teacher implements DataStorageInterface<Teacher> {
         return id;
     }
 
-    public String getSpecialisations() {
-        return specialisations;
+    public String getSpeciality() {
+        return speciality;
     }
     public void setId(int id) {
         this.id = id;
+    }
+    private int setId() {
+        int dbCount = database.count();
+        if (dbCount == 0) {
+            return this.id = 1;
+        } else return ++dbCount ;
+    }
+
+    private void prepareData() {
+        data.add(String.valueOf(setId()));
+        data.add(this.name);
+        data.add(this.speciality);
     }
     
 	@Override
@@ -52,7 +66,9 @@ public class Teacher implements DataStorageInterface<Teacher> {
 	}
 	@Override
 	public void save() {
-        database.createFileIfNotExists();
+        prepareData();
+        database.write(data);
+        
 	}
 	@Override
 	public void update(Teacher data) {
@@ -73,11 +89,11 @@ public class Teacher implements DataStorageInterface<Teacher> {
 
     //Keeping simple, this needs to be its own table if multiple allowed
     // public void addSpecialisation(String special) {
-    //     if (specialisations == "") {
-    //         specialisations = special;
+    //     if (speciality == "") {
+    //         speciality = special;
     //         return;
     //     }
-    //     specialisations += ", " + special;
+    //     speciality += ", " + special;
     // }
 
 }
