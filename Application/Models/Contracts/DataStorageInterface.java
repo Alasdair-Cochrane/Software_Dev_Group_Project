@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface DataStorageInterface<T> {
     // Gets the data for a specific ID
-    public T read(int id);
+    public T get(int id);
 
     // Get all entries as a list
     public List<T> getAll();

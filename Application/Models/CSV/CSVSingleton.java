@@ -6,7 +6,7 @@ public class CSVSingleton {
     private CSVSingleton() {
     }
 
-    public CSVSingleton getInstance() {
+    static CSVSingleton getInstance() {
         if (instance == null) {
             return instance = new CSVSingleton();
         } else {
