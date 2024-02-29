@@ -21,4 +21,7 @@ public interface DataStorageInterface<T> {
     // delete an object
     public void delete(T data);
 
+    // delete the retrieved object
+    public void delete();
+
 }
