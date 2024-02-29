@@ -1,3 +1,5 @@
+package Application.
+
 public class Requirement {
 
     private static int idCounter;
@@ -6,10 +8,21 @@ public class Requirement {
     private int hours;
     private int minimumExperience;
 
-    public int getId() {return id; }
-    public String getSubject() {return subject;}
-    public int getHours() {return hours;}
-    public int getMinimumExperience() { return minimumExperience; }
+    public int getId() {
+        return id;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public int getMinimumExperience() {
+        return minimumExperience;
+    }
 
     public Requirement(String subject, int numHours, int experience) {
 
@@ -18,6 +31,7 @@ public class Requirement {
         this.minimumExperience = experience;
         this.id = idCounter++;
     }
+
     public Requirement(int id, String subject, int numHours, int experience) {
 
         this.subject = subject;
