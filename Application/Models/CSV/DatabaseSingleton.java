@@ -1,14 +1,14 @@
 package Application.Models.CSV;
 
-public class CSVSingleton {
-    static CSVSingleton instance;
+public class DatabaseSingleton {
+    static DatabaseSingleton instance;
 
-    private CSVSingleton() {
+    private DatabaseSingleton() {
     }
 
-    static CSVSingleton getInstance() {
+    static DatabaseSingleton getInstance() {
         if (instance == null) {
-            return instance = new CSVSingleton();
+            return instance = new DatabaseSingleton();
         } else {
             return instance;
         }
