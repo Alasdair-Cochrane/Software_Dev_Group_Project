@@ -10,13 +10,15 @@ public class Booking implements DataStorageInterface<Booking> {
     private Date date;
     private Teacher teacher;
     private String trainingSubject;
-    private FileIO database;
+    private Database database;
+
+    public Booking() {}
 
     public Booking(Date date, Teacher teach, String subject) {
         this.date = date;
         this.teacher = teach;
         this.trainingSubject = subject;
-        this.database = new FileIO(this.getClass().getSimpleName());
+        this.database = new Database(this.getClass().getSimpleName());
     }
 
     public Date getDate() {
