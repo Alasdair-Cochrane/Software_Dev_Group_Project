@@ -1,19 +1,16 @@
 
-package Application.Models.CSV;
+package Application.Models;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import Application.Models.Contracts.Data;
 import Application.Models.Contracts.DataStorageInterface;
 
-public final class Teacher implements DataStorageInterface<Teacher> {
+public final class Teacher extends Data<Teacher> implements DataStorageInterface<Teacher> {
 
-    private final static String errorMessage = "Not instantiated or not in the database";
-    private int id;
     private String name;
     private String speciality;
-    private Database database = new Database(this);
-    List<String> data = new ArrayList<>();
 
     public Teacher() {
     }
@@ -26,17 +23,6 @@ public final class Teacher implements DataStorageInterface<Teacher> {
     public Teacher(int id, String name, String specialisation) {
         this.name = name;
         this.speciality = specialisation;
-        this.id = id;
-    }
-
-    public int getId() {
-        if (id == 0) {
-            return 0;
-        }
-        return id;
-    }
-
-    public void setId(int id) {
         this.id = id;
     }
 
@@ -62,12 +48,13 @@ public final class Teacher implements DataStorageInterface<Teacher> {
         this.speciality = speciality;
     }
 
-    private int setId() {
-        int dbCount = database.count();
-        if (dbCount == 0) {
-            return this.id = 1;
-        } else
-            return ++dbCount;
+    private Teacher makeTeacher(List<String> data) {
+        this.id = Integer.parseInt(data.get(0));
+        this.name = data.get(1);
+        this.speciality = data.get(2);
+        // Important as each instance will be different
+        // This is a factory method
+        return new Teacher(id, name, speciality);
     }
 
     private void prepareData() {
@@ -94,8 +81,8 @@ public final class Teacher implements DataStorageInterface<Teacher> {
     public List<Teacher> getAll() {
         List<Teacher> teachersList = new ArrayList<>();
         List<List<String>> teachers = this.database.retrieveAll();
-        for (List<String> list : teachers) {
-            teachersList.add(makeTeacher(list));
+        for (List<String> teacher : teachers) {
+            teachersList.add(makeTeacher(teacher));
         }
         if (teachersList.isEmpty()) {
             return null;
@@ -121,15 +108,6 @@ public final class Teacher implements DataStorageInterface<Teacher> {
         if (this.getId() != 0) {
             database.delete(this.id);
         }
-    }
-
-    private Teacher makeTeacher(List<String> data) {
-        this.id = Integer.parseInt(data.get(0));
-        this.name = data.get(1);
-        this.speciality = data.get(2);
-        // Important as each instance will be different
-        // This is a factory method
-        return new Teacher(id, name, speciality);
     }
 
     // Keeping simple, this needs to be its own table if multiple allowed

@@ -1,4 +1,4 @@
-package Application.Models.CSV;
+package Application.Models;
 
 import java.util.List;
 
@@ -12,14 +12,16 @@ public class Requirement implements DataStorageInterface<Requirement> {
     private int minimumExperience;
     private Database database;
 
-    public Requirement() {}
+    public Requirement() {
+    }
+
     public Requirement(String subject, int numHours, int experience) {
 
         this.subject = subject;
         this.hours = numHours;
         this.minimumExperience = experience;
         this.database = new Database(this.getClass().getSimpleName());
-    
+
     }
 
     public int getId() {
@@ -37,7 +39,6 @@ public class Requirement implements DataStorageInterface<Requirement> {
     public int getMinimumExperience() {
         return minimumExperience;
     }
-
 
     public Requirement(int id, String subject, int numHours, int experience) {
 

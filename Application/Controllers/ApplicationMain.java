@@ -3,8 +3,8 @@ package Application.Controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import Application.Models.Teacher;
 import Application.Models.CSV.Requirement;
-import Application.Models.CSV.Teacher;
 import Application.Models.CSV.TrainingBooking;
 
 public class ApplicationMain {

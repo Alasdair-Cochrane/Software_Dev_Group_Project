@@ -55,8 +55,8 @@ public class Database {
     }
 
     public List<List<String>> retrieveAll() {
-         List<List<String>> data = new ArrayList<>();
-         try (BufferedReader br = new BufferedReader(new FileReader(database))) {
+        List<List<String>> data = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(database))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
@@ -73,9 +73,8 @@ public class Database {
         if (!data.isEmpty()) {
             return data;
         }
-        return null;       
+        return null;
     }
-
 
     public void delete(int id) {
         // Read the lines from the CSV file and store them in a list
@@ -86,7 +85,7 @@ public class Database {
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
                 // If empty line, or populated and ID not the requested ID
-                if (parts.length >= 0  && !parts[0].isEmpty() && Integer.parseInt(parts[0]) != id) {
+                if (parts.length >= 0 && !parts[0].isEmpty() && Integer.parseInt(parts[0]) != id) {
                     lines.add(line); // Add the line to the list if ID doesn't match
                 } else {
                     // this is to avoid ID clash
@@ -97,7 +96,7 @@ public class Database {
             e.printStackTrace();
         }
 
-        //updates database
+        // updates database
         write(lines);
     }
 
@@ -127,7 +126,7 @@ public class Database {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(database))) {
             for (String line : lines) {
                 bw.write(line);
-                //if deleted model do not add line
+                // if deleted model do not add line
                 if (line != "\n") {
                     bw.newLine();
                 }
