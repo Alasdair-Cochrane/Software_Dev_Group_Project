@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Database {
+import Application.Models.Contracts.DatabaseInterface;
+
+public class Database implements DatabaseInterface {
     File database;
 
     public Database(Object object) {
