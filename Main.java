@@ -1,10 +1,10 @@
 import java.util.List;
 
-import Application.Models.CSV.Teacher;
+import Application.Models.Teacher;
 
 public class Main {
 
-    public static void main(String[] args) {     
+    public static void main(String[] args) {
         // Teacher teacher = new Teacher("emran","test");
         // Teacher teacher1 = new Teacher("james","test");
         // Teacher teacher2 = new Teacher("bob","test");
