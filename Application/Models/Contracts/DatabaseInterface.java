@@ -5,7 +5,7 @@ import java.util.List;
 public interface DatabaseInterface {
     public void add(List<String> data);
 
-    public List<String> retireve(int id);
+    public List<String> retrieve(int id);
 
     public List<List<String>> retrieveAll();
 
