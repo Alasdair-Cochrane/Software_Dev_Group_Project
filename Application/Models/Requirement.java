@@ -23,6 +23,14 @@ public final class Requirement extends Data<Requirement> implements DataStorageI
 
     }
 
+    private Requirement(int id, int subjectId, int numHours, int experience) {
+        this.id = id;
+        this.subjectId = subjectId;
+        this.hours = numHours;
+        this.minimumExperience = experience;
+
+    }
+
     public int getSubjectId() {
         return subjectId;
     }
@@ -54,7 +62,7 @@ public final class Requirement extends Data<Requirement> implements DataStorageI
         this.minimumExperience = Integer.parseInt(data.get(3));
         // Important as each instance will be different
         // This is a factory method
-        return new Requirement(subjectId, hours, minimumExperience);
+        return new Requirement(this.id, this.subjectId, this.hours, this.minimumExperience);
     }
 
     private void prepareData() {

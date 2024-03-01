@@ -31,6 +31,13 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 		this.date = date;
 	}
 
+	private Booking(int id, int teacherId, int subjectId, String date) {
+		this.id = id;
+		this.teacherId = teacherId;
+		this.subjectId = subjectId;
+		this.date = date;
+	}
+
 	public String getDate() {
 		return this.date;
 	}
@@ -63,7 +70,7 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 		this.date = data.get(3);
 		// Important as each instance will be different
 		// This is a factory method
-		return new Booking(teacherId, subjectId, date);
+		return new Booking(this.id, this.teacherId, this.subjectId, this.date);
 	}
 
 	private void prepareData() {

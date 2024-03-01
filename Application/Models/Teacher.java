@@ -20,7 +20,7 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
         this.speciality = specialisation;
     }
 
-    public Teacher(int id, String name, String specialisation) {
+    private Teacher(int id, String name, String specialisation) {
         this.name = name;
         this.speciality = specialisation;
         this.id = id;
@@ -54,7 +54,7 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
         this.speciality = data.get(2);
         // Important as each instance will be different
         // This is a factory method
-        return new Teacher(id, name, speciality);
+        return new Teacher(this.id, this.name, this.speciality);
     }
 
     private void prepareData() {
