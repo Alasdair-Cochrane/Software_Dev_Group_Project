@@ -8,26 +8,26 @@ import java.util.List;
 import Application.Models.Contracts.Data;
 import Application.Models.Contracts.DataStorageInterface;
 
-public class Booking extends Data<Booking> implements DataStorageInterface<Booking> {
+public final class Booking extends Data<Booking> implements DataStorageInterface<Booking> {
 
 	private String date;
 	// teacher ID
-	private int teacherID;
-	private int subjectID;
+	private int teacherId;
+	private int subjectId;
 
 	public Booking() {
 	}
 
-	public Booking(int teacherID, int subjectID, Date date) {
+	public Booking(int teacherId, int subjectId, Date date) {
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-		this.teacherID = teacherID;
-		this.subjectID = subjectID;
+		this.teacherId = teacherId;
+		this.subjectId = subjectId;
 		this.date = format.format(date);
 	}
 
-	public Booking(int teacherID, int subjectID, String date) {
-		this.teacherID = teacherID;
-		this.subjectID = subjectID;
+	public Booking(int teacherId, int subjectId, String date) {
+		this.teacherId = teacherId;
+		this.subjectId = subjectId;
 		this.date = date;
 	}
 
@@ -40,22 +40,30 @@ public class Booking extends Data<Booking> implements DataStorageInterface<Booki
 		this.date = format.format(date);
 	}
 
-	public int getTeacher() {
-		return teacherID;
+	public int getTeachrId() {
+		return teacherId;
 	}
 
-	public void setTeacher(int teacherID) {
-		this.teacherID = teacherID;
+	public void setTeacheId(int teacherId) {
+		this.teacherId = teacherId;
+	}
+
+	public int getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(int subjectId) {
+		this.subjectId = subjectId;
 	}
 
 	private Booking makeBooking(List<String> data) {
 		this.id = Integer.parseInt(data.get(0));
-		this.teacherID = Integer.parseInt(data.get(1));
-		this.subjectID = Integer.parseInt(data.get(2));
+		this.teacherId = Integer.parseInt(data.get(1));
+		this.subjectId = Integer.parseInt(data.get(2));
 		this.date = data.get(3);
 		// Important as each instance will be different
 		// This is a factory method
-		return new Booking(teacherID, subjectID, date);
+		return new Booking(teacherId, subjectId, date);
 	}
 
 	private void prepareData() {
@@ -66,9 +74,9 @@ public class Booking extends Data<Booking> implements DataStorageInterface<Booki
 		// TODO this is not necessary in real database
 		// but suffice for this coursework
 		data.add(String.valueOf(this.getId()));
-		data.add(String.valueOf(this.teacherID));
-		data.add(String.valueOf(this.subjectID));
-		data.add(this.date);
+		data.add(String.valueOf(this.getTeachrId()));
+		data.add(String.valueOf(this.getSubjectId()));
+		data.add(this.getDate());
 
 	}
 

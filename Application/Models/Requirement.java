@@ -1,87 +1,113 @@
 package Application.Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import Application.Models.Contracts.Data;
 import Application.Models.Contracts.DataStorageInterface;
 
-public class Requirement implements DataStorageInterface<Requirement> {
+public final class Requirement extends Data<Requirement> implements DataStorageInterface<Requirement> {
 
-    private int id;
-    private String subject;
+    private int subjectId;
     private int hours;
     private int minimumExperience;
-    private Database database;
 
     public Requirement() {
     }
 
-    public Requirement(String subject, int numHours, int experience) {
+    public Requirement(int subjectId, int numHours, int experience) {
 
-        this.subject = subject;
+        this.subjectId = subjectId;
         this.hours = numHours;
         this.minimumExperience = experience;
-        this.database = new Database(this.getClass().getSimpleName());
 
     }
 
-    public int getId() {
-        return id;
+    public int getSubjectId() {
+        return subjectId;
     }
 
-    public String getSubject() {
-        return subject;
+    public void setSubjectID(int subjectId) {
+        this.subjectId = subjectId;
     }
 
     public int getHours() {
         return hours;
     }
 
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
     public int getMinimumExperience() {
         return minimumExperience;
     }
 
-    public Requirement(int id, String subject, int numHours, int experience) {
+    public void setMinimumExperience(int minimumExperience) {
+        this.minimumExperience = minimumExperience;
+    }
 
-        this.subject = subject;
-        this.hours = numHours;
-        this.minimumExperience = experience;
-        this.id = id;
+    private Requirement makRequirement(List<String> data) {
+        this.id = Integer.parseInt(data.get(0));
+        this.subjectId = Integer.parseInt(data.get(1));
+        this.hours = Integer.parseInt(data.get(2));
+        this.minimumExperience = Integer.parseInt(data.get(3));
+        // Important as each instance will be different
+        // This is a factory method
+        return new Requirement(subjectId, hours, minimumExperience);
+    }
+
+    private void prepareData() {
+        if (this.getId() == 0) {
+            // Auto incremenet
+            this.id = this.setId();
+        }
+        data.add(String.valueOf(this.getId()));
+        data.add(String.valueOf(this.getSubjectId()));
+        data.add(String.valueOf(this.getHours()));
+        data.add(String.valueOf(this.getMinimumExperience()));
     }
 
     @Override
     public Requirement get(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        List<String> result = database.retrieve(id);
+        // only if the object exists in the database
+        if (result != null) {
+            return makRequirement(result);
+        }
+        return this;
     }
 
     @Override
     public List<Requirement> getAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        List<Requirement> requirementList = new ArrayList<>();
+        List<List<String>> requirements = this.database.retrieveAll();
+        for (List<String> requirment : requirements) {
+            requirementList.add(makRequirement(requirment));
+        }
+        if (requirementList.isEmpty()) {
+            return null;
+        } else
+            return requirementList;
     }
 
     @Override
     public void save() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
+        this.prepareData();
+        database.add(data);
     }
 
     @Override
-    public void update(Requirement data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public void update() {
+        this.delete();
+        this.save();
     }
 
     @Override
-    public void delete(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-
-    @Override
-    public void delete(Requirement data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public void delete() {
+        if (this.getId() != 0) {
+            database.delete(this.id);
+        }
     }
 
 }
