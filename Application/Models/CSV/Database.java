@@ -41,7 +41,9 @@ public class Database {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length >= 1 && Integer.parseInt(parts[0]) == id) {
+                // get the populated data with the requested ID
+                // If deleted entry avoid
+                if (parts.length > 0 && !parts[0].isEmpty() && Integer.parseInt(parts[0]) == id) {
                     return Arrays.asList(parts);
                 }
             }

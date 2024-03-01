@@ -13,13 +13,7 @@ public interface DataStorageInterface<T> {
     public void save();
 
     //update the model
-    public void update(T data);
-
-    //Delete the model
-    public void delete(int id);
-
-    // delete an object
-    public void delete(T data);
+    public void update();
 
     // delete the retrieved object
     public void delete();

@@ -8,32 +8,25 @@ import Application.Models.Contracts.DataStorageInterface;
 
 public final class Teacher implements DataStorageInterface<Teacher> {
 
-    private final static String errorMessage ="Not instantiated or not in the database"; 
+    private final static String errorMessage = "Not instantiated or not in the database";
     private int id;
     private String name;
     private String speciality;
-    private Database database;
-    List<String> data;
+    private Database database = new Database(this);
+    List<String> data = new ArrayList<>();
 
     public Teacher() {
-
     }
+
     public Teacher(String name, String specialisation) {
-        this.data = new ArrayList<>();
         this.name = name;
         this.speciality = specialisation;
-        this.database = new Database(this);
     }
+
     public Teacher(int id, String name, String specialisation) {
         this.name = name;
         this.speciality = specialisation;
         this.id = id;
-    }
-    public String getName() {
-        if (this.name == null) {
-            return errorMessage;
-        }
-        return this.name;
     }
 
     public int getId() {
@@ -43,79 +36,96 @@ public final class Teacher implements DataStorageInterface<Teacher> {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        if (this.name == null) {
+            return errorMessage;
+        }
+        return this.name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getSpeciality() {
         if (this.speciality == null) {
             return errorMessage;
         }
         return this.speciality;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
+
     private int setId() {
         int dbCount = database.count();
         if (dbCount == 0) {
             return this.id = 1;
-        } else return ++dbCount ;
+        } else
+            return ++dbCount;
     }
 
     private void prepareData() {
-        data.add(String.valueOf(setId()));
+        if (this.getId() == 0) {
+         // Auto incremenet
+         this.id = this.setId();   
+        }
+        data.add(String.valueOf(this.getId()));
         data.add(this.name);
         data.add(this.speciality);
     }
-    
-	@Override
-	public Teacher get(int id) {
-       List<String> result = database.retrieve(id);
-       this.id = Integer.parseInt(result.get(0));
-       this.name = result.get(1);
-       this.speciality = result.get(2);
-       return this;
-	}
 
-	@Override
-	public List<Teacher> getAll() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getAll'");
-	}
-	@Override
-	public void save() {
-        prepareData();
+    @Override
+    public Teacher get(int id) {
+        List<String> result = database.retrieve(id);
+        // only if the object exists in the database
+        if (result != null) {
+            this.id = Integer.parseInt(result.get(0));
+            this.name = result.get(1);
+            this.speciality = result.get(2);
+            // Important as each instance will be different
+            // This is a factory method 
+            return new Teacher(id, name, speciality);
+        }
+        return this;
+    }
+
+    @Override
+    public List<Teacher> getAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+    }
+
+    @Override
+    public void save() {
+        this.prepareData();
         database.add(data);
-        
-	}
-	@Override
-	public void update(Teacher data) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'update'");
-	}
-	@Override
-	public void delete(int id) {
-        database.delete(id);
-	}
-	@Override
-	public void delete(Teacher data) {
-        if (data.getId() != 0) {
-            delete(data.getId());
-        }
-	}
 
-	@Override
-	public void delete() {
+    }
+
+    @Override
+    public void update() {
+        this.delete();
+        this.save();
+    }
+
+    @Override
+    public void delete() {
         if (this.getId() != 0) {
-            delete(this.getId());
+            database.delete(this.id);
         }
-	}
-    
+    }
 
-    //Keeping simple, this needs to be its own table if multiple allowed
+    // Keeping simple, this needs to be its own table if multiple allowed
     // public void addSpecialisation(String special) {
-    //     if (speciality == "") {
-    //         speciality = special;
-    //         return;
-    //     }
-    //     speciality += ", " + special;
+    // if (speciality == "") {
+    // speciality = special;
+    // return;
+    // }
+    // speciality += ", " + special;
     // }
 
 }
