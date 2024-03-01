@@ -46,6 +46,7 @@ public final class Teacher implements DataStorageInterface<Teacher> {
         }
         return this.name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -56,6 +57,7 @@ public final class Teacher implements DataStorageInterface<Teacher> {
         }
         return this.speciality;
     }
+
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
@@ -70,8 +72,8 @@ public final class Teacher implements DataStorageInterface<Teacher> {
 
     private void prepareData() {
         if (this.getId() == 0) {
-         // Auto incremenet
-         this.id = this.setId();   
+            // Auto incremenet
+            this.id = this.setId();
         }
         data.add(String.valueOf(this.getId()));
         data.add(this.name);
@@ -83,20 +85,22 @@ public final class Teacher implements DataStorageInterface<Teacher> {
         List<String> result = database.retrieve(id);
         // only if the object exists in the database
         if (result != null) {
-            this.id = Integer.parseInt(result.get(0));
-            this.name = result.get(1);
-            this.speciality = result.get(2);
-            // Important as each instance will be different
-            // This is a factory method 
-            return new Teacher(id, name, speciality);
+            return makeTeacher(result);
         }
         return this;
     }
 
     @Override
     public List<Teacher> getAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        List<Teacher> teachersList = new ArrayList<>();
+        List<List<String>> teachers = this.database.retrieveAll();
+        for (List<String> list : teachers) {
+            teachersList.add(makeTeacher(list));
+        }
+        if (teachersList.isEmpty()) {
+            return null;
+        } else
+            return teachersList;
     }
 
     @Override
@@ -117,6 +121,15 @@ public final class Teacher implements DataStorageInterface<Teacher> {
         if (this.getId() != 0) {
             database.delete(this.id);
         }
+    }
+
+    private Teacher makeTeacher(List<String> data) {
+        this.id = Integer.parseInt(data.get(0));
+        this.name = data.get(1);
+        this.speciality = data.get(2);
+        // Important as each instance will be different
+        // This is a factory method
+        return new Teacher(id, name, speciality);
     }
 
     // Keeping simple, this needs to be its own table if multiple allowed
