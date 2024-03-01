@@ -72,12 +72,14 @@ public final class Subject extends Data<Subject> implements DataStorageInterface
 
     @Override
     public void save() {
-        this.delete();
-        this.save();
+        this.prepareData();
+        database.add(data);
     }
 
     @Override
     public void update() {
+        this.delete();
+        database.add(data);
     }
 
     @Override
