@@ -1,3 +1,5 @@
+import java.util.List;
+
 import Application.Models.CSV.Teacher;
 
 public class Main {
@@ -12,13 +14,17 @@ public class Main {
         // teacher.get(1);
         // System.out.println(teacher.getName());
         Teacher teacher = new Teacher();
-        Teacher emran = teacher.get(7);
-        Teacher james = teacher.get(12);
-        james.setName("bob");
-        emran.setName("alex");
-        emran.update();
-        james.save();
+        // Teacher emran = teacher.get(7);
+        // Teacher james = teacher.get(12);
+        // james.setName("bob");
+        // emran.setName("alex");
+        // emran.update();
+        // james.save();
 
+        List<Teacher> teachers = teacher.getAll();
+        for (Teacher staff : teachers) {
+            System.out.println(staff.getId());
+        }
 
     }
 }

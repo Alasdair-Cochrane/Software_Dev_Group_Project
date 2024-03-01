@@ -54,6 +54,29 @@ public class Database {
         return null;
     }
 
+    public List<List<String>> retrieveAll() {
+         List<List<String>> data = new ArrayList<>();
+         try (BufferedReader br = new BufferedReader(new FileReader(database))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",");
+                // get the populated data with the requested ID
+                // If deleted entry avoid
+                if (parts.length > 0 && !parts[0].isEmpty()) {
+                    data.add(Arrays.asList(parts));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // retrun null if not found
+        if (!data.isEmpty()) {
+            return data;
+        }
+        return null;       
+    }
+
+
     public void delete(int id) {
         // Read the lines from the CSV file and store them in a list
         List<String> lines = new ArrayList<>();
