@@ -12,9 +12,17 @@ import java.util.List;
 
 import Application.Models.Contracts.DatabaseInterface;
 
+/**
+ * Concrete CSV database
+ */
 public class Database implements DatabaseInterface {
     File database;
 
+    /**
+     * Creates the database
+     * 
+     * @param object
+     */
     public Database(Object object) {
         String path = DatabaseSingleton.getInstance().getDatabasePath() + object.getClass().getSimpleName() + "s.csv";
         this.database = new File(path);
@@ -38,6 +46,12 @@ public class Database implements DatabaseInterface {
         }
     }
 
+    /**
+     * Retrieve the data from database
+     * 
+     * @param id
+     * @return
+     */
     public List<String> retrieve(int id) {
         try (BufferedReader br = new BufferedReader(new FileReader(database))) {
             String line;
@@ -56,6 +70,11 @@ public class Database implements DatabaseInterface {
         return null;
     }
 
+    /**
+     * Get all valid data
+     * 
+     * @return
+     */
     public List<List<String>> retrieveAll() {
         List<List<String>> data = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(database))) {
@@ -78,6 +97,12 @@ public class Database implements DatabaseInterface {
         return null;
     }
 
+    /**
+     * Delete the data with a specific ID
+     * The deleted data will be replace by empty line to upkeep ID integrity
+     * 
+     * @param id
+     */
     public void delete(int id) {
         // Read the lines from the CSV file and store them in a list
         List<String> lines = new ArrayList<>();
@@ -102,6 +127,11 @@ public class Database implements DatabaseInterface {
         write(lines);
     }
 
+    /**
+     * Total number of data in the database
+     * 
+     * @return
+     */
     public int count() {
         int count = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(database))) {
@@ -124,6 +154,14 @@ public class Database implements DatabaseInterface {
         }
     }
 
+    /**
+     * This is used to rewrite the database after delete or update
+     * Not efficient, but filesystem database is retarded itself.
+     * In real application you do not have this issue with databases
+     * The reason blank line is added is to keep ID unique
+     * 
+     * @param lines
+     */
     private void write(List<String> lines) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(database))) {
             for (String line : lines) {

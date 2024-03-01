@@ -11,7 +11,7 @@ import Application.Models.Contracts.DataStorageInterface;
 public class Main {
 
     public static void main(String[] args) {
-        List<DataStorageInterface> tables = new ArrayList<>();
+        List<DataStorageInterface<?>> tables = new ArrayList<>();
 
         // The databases are automatically created if they do not exists in
         // Database/FileSystem/ path
