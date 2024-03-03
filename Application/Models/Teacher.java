@@ -10,33 +10,37 @@ import Application.Models.Contracts.DataStorageInterface;
 public final class Teacher extends Data<Teacher> implements DataStorageInterface<Teacher> {
 
     private String name;
-    private String speciality;
+    private int subjectId;
     private int experience;
 
     public Teacher() {
     }
 
-    public Teacher(String name, String specialisation,int experience) {
+    public Teacher(String name, int subjectId, int experience) {
         this.name = name;
-        this.speciality = specialisation;
+        this.subjectId = subjectId;
         this.experience = experience;
     }
 
-    private Teacher(int id, String name, String specialisation, int experience) {
+    private Teacher(int id, String name, int subjectId, int experience) {
         this.name = name;
-        this.speciality = specialisation;
+        this.subjectId = subjectId;
         this.id = id;
         this.experience = experience;
     }
-    
-    public int getExperience(){
-    	return experience;
-    	}
 
-     public void setExperience(int experience) {
-    	 this.experience = experience;
-     }
-     
+    public int getExperience() {
+        if (this.experience == 0) {
+            System.err.println("no experience has been allocated");
+            return 0;
+        }
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
+
     public String getName() {
         if (this.name == null) {
             return errorMessage;
@@ -48,24 +52,27 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
         this.name = name;
     }
 
-    public String getSpeciality() {
-        if (this.speciality == null) {
-            return errorMessage;
+    public int getSubjectId() {
+        if (this.subjectId == 0) {
+            System.err.println("No subject has been associated yet");
+            return 0;
         }
-        return this.speciality;
+        return this.subjectId;
     }
 
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
     }
 
     private Teacher makeTeacher(List<String> data) {
         this.id = Integer.parseInt(data.get(0));
         this.name = data.get(1);
-        this.speciality = data.get(2);
+        this.subjectId = Integer.parseInt(data.get(2));
+        this.experience = Integer.parseInt(data.get(3));
         // Important as each instance will be different
         // This is a factory method
-        return new Teacher(this.id, this.name, this.speciality,this.experience);
+        return new Teacher(this.id, this.name, this.subjectId,this.experience);
+
     }
 
     private void prepareData() {
@@ -75,8 +82,9 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
         }
         data.add(String.valueOf(this.getId()));
         data.add(this.name);
-        data.add(this.speciality);
-    }
+        data.add(String.valueOf(this.subjectId));
+        data.add(String.valueOf(this.experience));
+    } 
 
     @Override
     public Teacher get(int id) {

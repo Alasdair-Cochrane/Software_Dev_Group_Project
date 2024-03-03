@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Application.Models.*;
-import Application.Models.CSV.Requirement;
-import Application.Models.CSV.TrainingBooking;
+import Application.Models.Requirement;
+import Application.Models.Booking;
 
 public class ApplicationMain {
 
     public List<Teacher> teachers;
     public List<Requirement> requirements;
-    public List<TrainingBooking> bookings;
+    public List<Booking> bookings;
 
     public ApplicationMain() {
         teachers = new ArrayList<>();
