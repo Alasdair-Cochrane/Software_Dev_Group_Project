@@ -17,9 +17,9 @@ public class Main {
         // the path is not created
 
         // 1. Creating Objects using constructors
-        Teacher teacher3 = new Teacher("emran", "test");
-        Teacher teacher1 = new Teacher("james", "test");
-        Teacher teacher2 = new Teacher("bob", "test");
+        Teacher teacher3 = new Teacher("emran", "test",10);
+        Teacher teacher1 = new Teacher("james", "test",7);
+        Teacher teacher2 = new Teacher("bob", "test",6);
 
         Subject subject = new Subject("chemistry");
         Subject subject2 = new Subject("Biology");
