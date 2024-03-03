@@ -32,13 +32,14 @@ public class ApplicationMain {
     }
     
     private boolean teacherMeetsRequirements(Teacher teacher, Requirement req) {
-    	boolean meetsSubject = teacher.getSpeciality().contains(req.getSubject());
+    	boolean meetsSubject = teacher.getSubjectId()==req.getSubjectId();
     	boolean meetsExperience = teacher.getExperience() >= req.getMinimumExperience();
     	 return meetsSubject && meetsExperience; 	
     }
 
 
-    public void addNewTeacher() {
+    public void addNewTeacher(Teacher teacher) {
+
 
     }
 
