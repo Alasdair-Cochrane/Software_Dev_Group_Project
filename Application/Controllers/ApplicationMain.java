@@ -3,7 +3,7 @@ package Application.Controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import Application.Models.Teacher;
+import Application.Models.*;
 import Application.Models.CSV.Requirement;
 import Application.Models.CSV.TrainingBooking;
 
@@ -20,8 +20,23 @@ public class ApplicationMain {
     }
 
     public List<Teacher> findAvailableTeacher(Requirement req) {
-        return null;
+	List<Teacher> availableTeachers = new ArrayList<>();
+    	
+    	for(Teacher teacher: teachers) {
+    		if(teacherMeetsRequirements(teacher, req)) {
+    			availableTeachers.add(teacher);
+    		}
+    		
+    	}
+        return availableTeachers;
     }
+    
+    private boolean teacherMeetsRequirements(Teacher teacher, Requirement req) {
+    	boolean meetsSubject = teacher.getSpeciality().contains(req.getSubject());
+    	boolean meetsExperience = teacher.getExperience() >= req.getMinimumExperience();
+    	 return meetsSubject && meetsExperience; 	
+    }
+
 
     public void addNewTeacher() {
 
