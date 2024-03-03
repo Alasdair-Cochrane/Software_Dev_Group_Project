@@ -1,5 +1,5 @@
 package Application.Views;
 
 public class Terminal {
-//This is terminal
+//This is terminal 2 second
 }
