@@ -47,7 +47,7 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 		this.date = format.format(date);
 	}
 
-	public int getTeachrId() {
+	public int getTeacherId() {
 		return teacherId;
 	}
 
@@ -81,7 +81,7 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 		// TODO this is not necessary in real database
 		// but suffice for this coursework
 		data.add(String.valueOf(this.getId()));
-		data.add(String.valueOf(this.getTeachrId()));
+		data.add(String.valueOf(this.getTeacherId()));
 		data.add(String.valueOf(this.getSubjectId()));
 		data.add(this.getDate());
 
