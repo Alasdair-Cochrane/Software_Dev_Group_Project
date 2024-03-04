@@ -8,6 +8,7 @@ import Application.Models.Booking;
 import Application.Models.Teacher;
 
 public class Terminal {
+	//display teaching requirements
 	public void displayTeachingRequirements(Requirement teachingRequirements) {
         List<Requirement> requirements = teachingRequirements.getAll();
 
@@ -28,6 +29,7 @@ public class Terminal {
 	        System.out.println();
 	    }
 
+	 //Display bookings
 	 public void displayBookings(Booking teachingBookings) {
 		 List <Booking> bookings = teachingBookings.getAll();
 	        if (bookings != null && !bookings.isEmpty()) {
@@ -47,6 +49,7 @@ public class Terminal {
 	        System.out.println();
 	    }
 	 	
+	 	//display Teachers available
  	public void displayTeachers(Teacher availableTeachers) {
  		List <Teacher> teachers = availableTeachers.getAll();
  		
@@ -54,8 +57,9 @@ public class Terminal {
  			System.out.println("Teachers");
  			for (Teacher teacher: teachers) {
  				displayTeacher(teacher);
- 			}
- 			
+ 			}	
+ 		}else {
+ 			System.out.println("No teachers available");
  		}
  	
  	}
