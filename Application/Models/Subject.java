@@ -3,12 +3,14 @@ package Application.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import Application.Models.CSV.Database;
 import Application.Models.Contracts.Data;
 import Application.Models.Contracts.DataStorageInterface;
 
 public final class Subject extends Data<Subject> implements DataStorageInterface<Subject> {
 
     private String name;
+    private final static  Database database = new Database(Subject.class);
 
     public Subject() {
     }
@@ -17,10 +19,12 @@ public final class Subject extends Data<Subject> implements DataStorageInterface
         this.name = name;
     }
 
-    private Subject(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    private Subject(List<String> data) {
+
+        this.id = Integer.parseInt(data.get(0));
+        this.name = data.get(1);
+
+        }
 
     public String getName() {
         return name;
@@ -30,15 +34,7 @@ public final class Subject extends Data<Subject> implements DataStorageInterface
         this.name = name;
     }
 
-    private Subject makSubject(List<String> data) {
-        this.id = Integer.parseInt(data.get(0));
-        this.name = data.get(1);
-        // Important as each instance will be different
-        // This is a factory method
-        return new Subject(this.id, this.name);
-    }
-
-    private void prepareData() {
+    protected void prepare() {
         if (this.getId() == 0) {
             // Auto incremenet
             this.id = this.setId();
@@ -47,22 +43,20 @@ public final class Subject extends Data<Subject> implements DataStorageInterface
         data.add(this.name);
     }
 
-    @Override
     public Subject get(int id) {
         List<String> result = database.retrieve(id);
         // only if the object exists in the database
         if (result != null) {
-            return makSubject(result);
+            return new Subject(result);
         }
         return this;
     }
 
-    @Override
-    public List<Subject> getAll() {
+    public static List<Subject> getAll() {
         List<Subject> subjectList = new ArrayList<>();
-        List<List<String>> subjects = this.database.retrieveAll();
+        List<List<String>> subjects = database.retrieveAll();
         for (List<String> subject : subjects) {
-            subjectList.add(makSubject(subject));
+            subjectList.add(new Subject(subject));
         }
         if (subjectList.isEmpty()) {
             return null;
@@ -72,7 +66,7 @@ public final class Subject extends Data<Subject> implements DataStorageInterface
 
     @Override
     public void save() {
-        this.prepareData();
+        this.prepare();
         database.add(data);
     }
 
