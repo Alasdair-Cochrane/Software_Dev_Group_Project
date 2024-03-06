@@ -3,28 +3,18 @@ package Application.Controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import Application.Models.Booking;
+import Application.Models.*;
 import Application.Models.Requirement;
-import Application.Models.Subject;
-import Application.Models.Teacher;
 
 public class Controller {
-	Teacher teacher;
-	Requirement requirement;
-	Booking booking;
-	Subject subject;
 
-	public Controller() {
-		teacher = new Teacher();
-		requirement = new Requirement();
-		booking = new Booking();
-		subject = new Subject();
-	}
+    public Controller() {
+    }
 
 //called by the view
-	public List<Teacher> matchTeacherWithRequirement(String input) {
-		int inputSubjectID = Integer.parseInt(input);
-		List<Requirement> requirements = requirement.getAll();
+    public List<Teacher> matchTeacherWithRequirement(String input){
+        int inputSubjectID = Integer.parseInt(input);   
+        List<Requirement> requirements = Requirement.getAll();     
 
 		for (Requirement r : requirements) {
 			if (r.getSubjectId() == inputSubjectID) {
@@ -39,13 +29,22 @@ public class Controller {
 		Teacher teacherModel = new Teacher();
 		List<Teacher> teachers = teacherModel.getAll();
 
-		for (Teacher teacher : teachers) {
-			if (teacherMeetsRequirements(teacher, req)) {
-				availableTeachers.add(teacher);
-			}
-		}
-		return availableTeachers;
-	}
+    private List<Teacher> findAvailableTeacher(Requirement req) {
+        List<Teacher> availableTeachers = new ArrayList<>(); 
+        List<Teacher> teachers = Teacher.getAll();
+    	
+    	for(Teacher teacher: teachers) {
+    		if(teacherMeetsRequirements(teacher, req)) {
+    			availableTeachers.add(teacher);
+    		}    		
+    	}
+        return availableTeachers;
+    }
+    
+    private boolean teacherMeetsRequirements(Teacher teacher, Requirement req) {
+        if (req.getSubjectId() == teacher.getSubjectId() &&
+            teacher.getExperience() >= req.getMinimumExperience()){
+                    return true;
 
 	private boolean teacherMeetsRequirements(Teacher teacher, Requirement req) {
 		if (req.getSubjectId() == teacher.getSubjectId() && teacher.getExperience() >= req.getMinimumExperience()) {

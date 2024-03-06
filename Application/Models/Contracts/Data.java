@@ -5,11 +5,11 @@ import java.util.List;
 
 import Application.Models.CSV.Database;
 
-public abstract class Data<T> {
+abstract public class Data<T> {
     protected final static String errorMessage = "Not instantiated or not in the database";
     protected int id;
-    protected Database database = new Database(this);
     protected List<String> data = new ArrayList<>();
+    protected static Database database;
 
     public Data() {
     }
@@ -33,4 +33,5 @@ public abstract class Data<T> {
             return ++dbCount;
     }
 
+    abstract protected void prepare();
 }

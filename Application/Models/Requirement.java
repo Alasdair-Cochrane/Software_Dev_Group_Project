@@ -3,6 +3,7 @@ package Application.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import Application.Models.CSV.Database;
 import Application.Models.Contracts.Data;
 import Application.Models.Contracts.DataStorageInterface;
 
@@ -11,6 +12,7 @@ public final class Requirement extends Data<Requirement> implements DataStorageI
     private int subjectId;
     private int hours;
     private int minimumExperience;
+    private final static  Database database = new Database(Requirement.class);
 
     public Requirement() {
     }
@@ -23,12 +25,12 @@ public final class Requirement extends Data<Requirement> implements DataStorageI
 
     }
 
-    private Requirement(int id, int subjectId, int numHours, int experience) {
-        this.id = id;
-        this.subjectId = subjectId;
-        this.hours = numHours;
-        this.minimumExperience = experience;
-
+    private Requirement(List<String> data) {
+ 
+        this.id = Integer.parseInt(data.get(0));
+        this.subjectId = Integer.parseInt(data.get(1));
+        this.hours = Integer.parseInt(data.get(2));
+        this.minimumExperience = Integer.parseInt(data.get(3));
     }
 
     public int getSubjectId() {
@@ -55,17 +57,7 @@ public final class Requirement extends Data<Requirement> implements DataStorageI
         this.minimumExperience = minimumExperience;
     }
 
-    private Requirement makRequirement(List<String> data) {
-        this.id = Integer.parseInt(data.get(0));
-        this.subjectId = Integer.parseInt(data.get(1));
-        this.hours = Integer.parseInt(data.get(2));
-        this.minimumExperience = Integer.parseInt(data.get(3));
-        // Important as each instance will be different
-        // This is a factory method
-        return new Requirement(this.id, this.subjectId, this.hours, this.minimumExperience);
-    }
-
-    private void prepareData() {
+    protected void prepare() {
         if (this.getId() == 0) {
             // Auto incremenet
             this.id = this.setId();
@@ -76,22 +68,20 @@ public final class Requirement extends Data<Requirement> implements DataStorageI
         data.add(String.valueOf(this.getMinimumExperience()));
     }
 
-    @Override
     public Requirement get(int id) {
         List<String> result = database.retrieve(id);
         // only if the object exists in the database
         if (result != null) {
-            return makRequirement(result);
+            return new Requirement(result);
         }
         return this;
     }
 
-    @Override
-    public List<Requirement> getAll() {
+    public static List<Requirement> getAll() {
         List<Requirement> requirementList = new ArrayList<>();
-        List<List<String>> requirements = this.database.retrieveAll();
-        for (List<String> requirment : requirements) {
-            requirementList.add(makRequirement(requirment));
+        List<List<String>> requirements = database.retrieveAll();
+        for (List<String> requirement : requirements) {
+            requirementList.add(new Requirement(requirement));
         }
         if (requirementList.isEmpty()) {
             return null;
@@ -101,7 +91,7 @@ public final class Requirement extends Data<Requirement> implements DataStorageI
 
     @Override
     public void save() {
-        this.prepareData();
+        this.prepare();
         database.add(data);
     }
 
