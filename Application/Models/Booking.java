@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import Application.Models.CSV.Database;
 import Application.Models.Contracts.Data;
 import Application.Models.Contracts.DataStorageInterface;
 
@@ -14,6 +15,7 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 	// teacher ID
 	private int teacherId;
 	private int subjectId;
+  private final static  Database database = new Database(Booking.class);
 
 	public Booking() {
 	}
@@ -31,11 +33,11 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 		this.date = date;
 	}
 
-	private Booking(int id, int teacherId, int subjectId, String date) {
-		this.id = id;
-		this.teacherId = teacherId;
-		this.subjectId = subjectId;
-		this.date = date;
+	private Booking(List<String> data) {
+		this.id = Integer.parseInt(data.get(0));
+		this.teacherId = Integer.parseInt(data.get(1));
+		this.subjectId = Integer.parseInt(data.get(2));
+		this.date = data.get(3);
 	}
 
 	public String getDate() {
@@ -63,17 +65,8 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 		this.subjectId = subjectId;
 	}
 
-	private Booking makeBooking(List<String> data) {
-		this.id = Integer.parseInt(data.get(0));
-		this.teacherId = Integer.parseInt(data.get(1));
-		this.subjectId = Integer.parseInt(data.get(2));
-		this.date = data.get(3);
-		// Important as each instance will be different
-		// This is a factory method
-		return new Booking(this.id, this.teacherId, this.subjectId, this.date);
-	}
 
-	private void prepareData() {
+	protected void prepare() {
 		if (this.getId() == 0) {
 			// Auto incremenet
 			this.id = this.setId();
@@ -87,22 +80,20 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 
 	}
 
-	@Override
 	public Booking get(int id) {
 		List<String> result = database.retrieve(id);
 		// only if the object exists in the database
 		if (result != null) {
-			return makeBooking(result);
+			return new Booking(result);
 		}
 		return this;
 	}
 
-	@Override
 	public List<Booking> getAll() {
 		List<Booking> bookingList = new ArrayList<>();
-		List<List<String>> bookings = this.database.retrieveAll();
+		List<List<String>> bookings = database.retrieveAll();
 		for (List<String> booking : bookings) {
-			bookingList.add(makeBooking(booking));
+			bookingList.add(new Booking(booking));
 		}
 		if (bookingList.isEmpty()) {
 			return null;
@@ -112,7 +103,7 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 
 	@Override
 	public void save() {
-		this.prepareData();
+		this.prepare();
 		database.add(data);
 	}
 

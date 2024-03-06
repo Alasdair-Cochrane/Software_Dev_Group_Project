@@ -4,6 +4,7 @@ package Application.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import Application.Models.CSV.Database;
 import Application.Models.Contracts.Data;
 import Application.Models.Contracts.DataStorageInterface;
 
@@ -14,23 +15,24 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
   private int experience;
   // nullable foreign key
   private int requriementId = 0;
+  private final static  Database database = new Database(Teacher.class);
 
   public Teacher() {
+  }
+
+  private Teacher(List<String> data) {
+    
+    this.id = Integer.parseInt(data.get(0));
+    this.name = data.get(1);
+    this.subjectId = Integer.parseInt(data.get(2));
+    this.experience = Integer.parseInt(data.get(3));
+    this.requriementId = Integer.parseInt(data.get(4));
   }
 
   public Teacher(String name, int subjectId, int experience) {
     this.name = name;
     this.subjectId = subjectId;
     this.experience = experience;
-  }
-
-  private Teacher(int id, String name, int subjectId, int experience, int requirementId) {
-    this.name = name;
-    this.subjectId = subjectId;
-    this.id = id;
-    this.experience = experience;
-    this.requriementId = requirementId;
-
   }
 
   public int getExperience() {
@@ -76,19 +78,7 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
     this.requriementId = requriementId;
   }
 
-  private Teacher makeTeacher(List<String> data) {
-    this.id = Integer.parseInt(data.get(0));
-    this.name = data.get(1);
-    this.subjectId = Integer.parseInt(data.get(2));
-    this.experience = Integer.parseInt(data.get(3));
-    this.requriementId = Integer.parseInt(data.get(4));
-    // Important as each instance will be different
-    // This is a factory method
-    return new Teacher(this.id, this.name, this.subjectId, this.experience, this.requriementId);
-
-  }
-
-  private void prepareData() {
+   protected void prepare() {
     if (this.getId() == 0) {
       // Auto incremenet
       this.id = this.setId();
@@ -100,22 +90,20 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
     data.add(String.valueOf(this.requriementId));
   }
 
-  @Override
-  public Teacher get(int id) {
+  public static Teacher get(int id) {
     List<String> result = database.retrieve(id);
     // only if the object exists in the database
     if (result != null) {
-      return makeTeacher(result);
+      return new Teacher(result);
     }
-    return this;
+    return null;
   }
 
-  @Override
   public List<Teacher> getAll() {
     List<Teacher> teachersList = new ArrayList<>();
-    List<List<String>> teachers = this.database.retrieveAll();
+    List<List<String>> teachers = database.retrieveAll();
     for (List<String> teacher : teachers) {
-      teachersList.add(makeTeacher(teacher));
+      teachersList.add(new Teacher(teacher));
     }
     if (teachersList.isEmpty()) {
       return null;
@@ -125,7 +113,7 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
 
   @Override
   public void save() {
-    this.prepareData();
+    this.prepare();
     database.add(data);
 
   }
