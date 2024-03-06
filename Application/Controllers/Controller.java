@@ -5,19 +5,10 @@ import java.util.List;
 
 import Application.Models.*;
 import Application.Models.Requirement;
-import Application.Models.Booking;
 
 public class Controller {
-        Teacher teacher;
-        Requirement requirement;
-        Booking booking;
-        Subject subject;
 
     public Controller() {
-        teacher = new Teacher();
-        requirement = new Requirement();
-        booking = new Booking();
-        subject = new Subject();
     }
 
 //called by the view
