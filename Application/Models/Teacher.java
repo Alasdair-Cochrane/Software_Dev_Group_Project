@@ -12,6 +12,7 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
     private String name;
     private int subjectId;
     private int experience;
+    //requirement id
 
     public Teacher() {
     }
