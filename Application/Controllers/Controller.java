@@ -23,7 +23,7 @@ public class Controller {
 //called by the view
     public List<Teacher> matchTeacherWithRequirement(String input){
         int inputSubjectID = Integer.parseInt(input);   
-        List<Requirement> requirements = requirement.getAll();     
+        List<Requirement> requirements = Requirement.getAll();     
 
         for(Requirement r : requirements){
             if(r.getSubjectId() == inputSubjectID){
@@ -35,9 +35,8 @@ public class Controller {
 
 
     private List<Teacher> findAvailableTeacher(Requirement req) {
-        List<Teacher> availableTeachers; 
-        Teacher teacherModel = new Teacher();
-        List<Teacher> teachers = teacherModel.getAll();
+        List<Teacher> availableTeachers = new ArrayList<>(); 
+        List<Teacher> teachers = Teacher.getAll();
     	
     	for(Teacher teacher: teachers) {
     		if(teacherMeetsRequirements(teacher, req)) {

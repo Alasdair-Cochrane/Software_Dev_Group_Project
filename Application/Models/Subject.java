@@ -52,7 +52,7 @@ public final class Subject extends Data<Subject> implements DataStorageInterface
         return this;
     }
 
-    public List<Subject> getAll() {
+    public static List<Subject> getAll() {
         List<Subject> subjectList = new ArrayList<>();
         List<List<String>> subjects = database.retrieveAll();
         for (List<String> subject : subjects) {

@@ -99,7 +99,7 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
     return null;
   }
 
-  public List<Teacher> getAll() {
+  public static  List<Teacher> getAll() {
     List<Teacher> teachersList = new ArrayList<>();
     List<List<String>> teachers = database.retrieveAll();
     for (List<String> teacher : teachers) {

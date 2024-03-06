@@ -89,7 +89,7 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 		return this;
 	}
 
-	public List<Booking> getAll() {
+	public static List<Booking> getAll() {
 		List<Booking> bookingList = new ArrayList<>();
 		List<List<String>> bookings = database.retrieveAll();
 		for (List<String> booking : bookings) {
