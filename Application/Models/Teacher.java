@@ -18,21 +18,20 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
   public Teacher() {
   }
 
-  public Teacher(String name, int subjectId, int experience, int requirementId) {
+  public Teacher(String name, int subjectId, int experience) {
     this.name = name;
     this.subjectId = subjectId;
     this.experience = experience;
-    this.requriementId = requirementId;
   }
 
-  private Teacher(int id, String name, int subjectId, int experience, int  requirementId) {
-        this.name = name;
-        this.subjectId = subjectId;
-        this.id = id;
-        this.experience = experience;
-        this.requriementId = requirementId;
-        
-    }
+  private Teacher(int id, String name, int subjectId, int experience, int requirementId) {
+    this.name = name;
+    this.subjectId = subjectId;
+    this.id = id;
+    this.experience = experience;
+    this.requriementId = requirementId;
+
+  }
 
   public int getExperience() {
     if (this.experience == 0) {
