@@ -69,7 +69,8 @@ public class Controller {
     }
 
     public void assignTeacher(Teacher teacher, Requirement requirement) {
-       //     teacher.setRequirementID(integer)
+        teacher.setRequriementId(requirement.getId());
+        teacher.update();
     }
 
     public void bookTraining(Teacher teacher) {
