@@ -2,4 +2,4 @@
 .vscode
 .project
 .classpath
-/**/*.class
+**/*.class
