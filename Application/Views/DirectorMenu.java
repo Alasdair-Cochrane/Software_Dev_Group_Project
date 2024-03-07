@@ -62,7 +62,7 @@ public class DirectorMenu {
 
 	// List of menu elements for director
 	private static String menuListForDirector() {
-		return ("You are in the Director panel: " + "\n0 Go to Main menu" + "\n1. Add requirement"
+		return ("You are in the Director panel: " + "\n0. Go to Main menu" + "\n1. Add requirement"
 				+ "\n2. View list of all requirement" + "\n3. View list of all teachers" + "\n4. Add new teacher"
 				+ "\n5. List of macthed teachers" + "\n6. Close the app");
 	}

@@ -64,6 +64,6 @@ public class AdministratorMenu {
 	private static String menuListForAdministrator() {
 		return ("You are in the Administrator panel: " + "\n0. Go to Main menu" + "\n1. View list of all requirement"
 				+ "\n2. View list of all teachers" + "\n3. Add new teacher" + "\n4. List of macthed teachers"
-				+ "\n5.Booking training" + "\n6. Close the app");
+				+ "\n5. Booking training" + "\n6. Close the app");
 	}
 }
