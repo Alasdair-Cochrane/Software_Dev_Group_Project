@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Application.Models.*;
-import Application.Models.Requirement;
 
 public class Controller {
+	
 
     public Controller() {
+  
     }
 
 //called by the view
@@ -65,6 +66,13 @@ public class Controller {
 
     public void bookTraining(Teacher teacher) {
 
+    }
+    
+    public static List<Requirement> getAllRequirement(){
+    	return Requirement.getAll(); 	
+    }
+    public static List<Teacher> getAllTeachers(){
+    	return Teacher.getAll(); 	
     }
 
 }
