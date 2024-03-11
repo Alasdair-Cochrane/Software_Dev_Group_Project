@@ -37,6 +37,17 @@ public class ViewRequestsOperations {
 					+ " and has " + teacher.getExperience() + " years experience");
 		}
 	}
+	
+	protected static void BookTraining(Controller controller) {
+		System.out.println("You choosed Booktraining by typing their name and ID and Experience: ");
+		String name = InputUtil.enterValue("Teacher's name: ");
+		int subjectID = Integer.parseInt(InputUtil.enterValue("Teacher's subject ID: "));
+		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
+		
+		Teacher teacher = new Teacher(name, subjectID, experience);
+	
+			controller.bookTraining(teacher);
+	}
 
 //	Show Main manu that asks to enter your role
 	protected static void MainMenu() {

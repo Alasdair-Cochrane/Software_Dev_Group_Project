@@ -16,16 +16,20 @@ public class AdministratorMenu {
 			ViewRequestsOperations.MainMenu();
 			break;
 		}
+		//methods gives an error when it tries to display the database -Nduka
 		case 1: {
 			System.out.println("View list of all requirement");
 //			controller.  => getAll method also should be implemented in the Controller class
+			controller.displayTeachingRequirements();
 			break;
 		}
 		case 2: {
 			System.out.println("View list of all teachers");
-//			controller we don't have method to get list of all teachers existed in our database;
+			controller.displayTeachers();
 			break;
 		}
+		
+		//This method gives an error when it tries to add a teacher to the database -Nduka
 		case 3: {
 			ViewRequestsOperations.requestAddTeacher(controller);
 			break;
@@ -36,9 +40,10 @@ public class AdministratorMenu {
 		}
 		case 5: {
 			System.out.println("Booking training");
-//			controller => from controller object after getting al list of teachers you can choose them with their id or name
-			controller.bookTraining(null);
-
+//		;
+			
+			ViewRequestsOperations.BookTraining(controller);
+			break;
 		}
 		case 6: {
 			ViewRequestsOperations.closeApp();

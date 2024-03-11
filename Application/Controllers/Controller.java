@@ -7,11 +7,50 @@ import Application.Models.*;
 import Application.Models.Requirement;
 
 public class Controller {
+	
+	private Requirement r;
+	private Teacher t;
 
     public Controller() {
     }
-
+    
+   
 //called by the view
+  //display teaching requirements
+    public void displayTeachingRequirements() {
+        List<Requirement> requirements = r.getAll();
+
+        if (requirements != null && !requirements.isEmpty()) {
+            System.out.println("Teaching Requirements for the Upcoming Term/Semester:");
+            for (Requirement requirement : requirements) {
+                displayTeachingRequirement(requirement);
+            }
+        } else {
+            System.out.println("No teaching requirements available for the upcoming term/semester.");
+        }
+    }private void displayTeachingRequirement(Requirement requirement) {
+  	        System.out.println("Subject ID: " + requirement.getSubjectId() + " | Hours: " + requirement.getHours() + " |Minimum Experience: " + requirement.getMinimumExperience());
+  	        
+  	    }
+    //Display teachers
+    public void displayTeachers() {
+        List<Teacher> teachers = t.getAll();
+
+        if (teachers != null && !teachers.isEmpty()) {
+            System.out.println("The available teachers Upcoming Term/Semester:");
+            for (Teacher teacher : teachers) {
+                displayTeachers(teacher);
+            }
+        } else {
+            System.out.println("No available teachers");
+        }
+    }private void displayTeachers(Teacher teachers) {
+  	        System.out.println("Name: " + teachers.getName() + " |Experience: " + teachers.getExperience());
+  	        
+  	    }
+	
+	
+    
     public List<Teacher> matchTeacherWithRequirement(String input){
         int inputSubjectID = Integer.parseInt(input);   
         List<Requirement> requirements = Requirement.getAll();     
@@ -25,7 +64,19 @@ public class Controller {
     }
 
 
-    private List<Teacher> findAvailableTeacher(Requirement req) {
+    public Requirement getR() {
+		return r;
+	}
+
+
+
+	public void setR(Requirement r) {
+		this.r = r;
+	}
+
+
+
+	private List<Teacher> findAvailableTeacher(Requirement req) {
         List<Teacher> availableTeachers = new ArrayList<>(); 
         List<Teacher> teachers = Teacher.getAll();
     	
@@ -55,16 +106,26 @@ public class Controller {
     public void addNewRequirement(int subject, int hours, int experience) {
         Requirement r = new Requirement(subject, hours, experience);
         r.save();
-
     }
 
     public void assignTeacher(Teacher teacher, Requirement requirement) {
         teacher.setRequriementId(requirement.getId());
         teacher.update();
     }
-
+    
+    
     public void bookTraining(Teacher teacher) {
-
+    	
+    	if(teacher != null) {
+    		 System.out.println("Training booked for teacher " + teacher.getName() +
+                     " for subject ID: " + teacher.getSubjectId() +
+                     " with experience requirement: " + teacher.getExperience() );
+    	}
+    	else {
+    		System.out.println("Unable to book training. Teacher not found");
+    	}
+    	
     }
+
 
 }

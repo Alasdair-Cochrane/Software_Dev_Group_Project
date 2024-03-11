@@ -1,9 +1,13 @@
 package Application.Views;
 
+import java.util.List;
+
 import Application.Controllers.Controller;
+import Application.Models.*;
 
 public class DirectorMenu {
 	static DirectorMenu instanceDirectorMenu;
+	
 
 //	//	To implement operation based on director selection	
 	private void menuList(Controller controller) {
@@ -22,11 +26,16 @@ public class DirectorMenu {
 		case 2: {
 			System.out.println("View list of all requirement");
 //			controller.  => getAll method also should be implemented in the Controller class
+			//method to display teaching requiremenrts
+			controller.displayTeachingRequirements();
+			
 			break;
 		}
 		case 3: {
 			System.out.println("View list of all teachers");
 //			controller we don't have method to get list of all teachers existed in our database;
+			//method to display teachers
+			controller.displayTeachers();
 			break;
 		}
 		case 4: {
