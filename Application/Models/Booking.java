@@ -39,6 +39,13 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 		this.subjectId = Integer.parseInt(data.get(2));
 		this.date = data.get(3);
 	}
+	protected int setId() {
+		int dbCount = database.count();
+		if (dbCount == 0) {
+			return this.id = 1;
+		} else
+			return ++dbCount;
+	}
 
 	public String getDate() {
 		return this.date;

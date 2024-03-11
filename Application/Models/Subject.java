@@ -9,78 +9,86 @@ import Application.Models.Contracts.DataStorageInterface;
 
 public final class Subject extends Data<Subject> implements DataStorageInterface<Subject> {
 
-    private String name;
-    private final static  Database database = new Database(Subject.class);
+  private String name;
+  private final static Database database = new Database(Subject.class);
 
-    public Subject() {
+  public Subject() {
+  }
+
+  public Subject(String name) {
+    this.name = name;
+  }
+
+  private Subject(List<String> data) {
+
+    this.id = Integer.parseInt(data.get(0));
+    this.name = data.get(1);
+
+  }
+
+  protected int setId() {
+    int dbCount = database.count();
+    if (dbCount == 0) {
+      return this.id = 1;
+    } else
+      return ++dbCount;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  protected void prepare() {
+    if (this.getId() == 0) {
+      // Auto incremenet
+      this.id = this.setId();
     }
+    data.add(String.valueOf(this.getId()));
+    data.add(this.name);
+  }
 
-    public Subject(String name) {
-        this.name = name;
+  public Subject get(int id) {
+    List<String> result = database.retrieve(id);
+    // only if the object exists in the database
+    if (result != null) {
+      return new Subject(result);
     }
+    return this;
+  }
 
-    private Subject(List<String> data) {
-
-        this.id = Integer.parseInt(data.get(0));
-        this.name = data.get(1);
-
-        }
-
-    public String getName() {
-        return name;
+  public static List<Subject> getAll() {
+    List<Subject> subjectList = new ArrayList<>();
+    List<List<String>> subjects = database.retrieveAll();
+    for (List<String> subject : subjects) {
+      subjectList.add(new Subject(subject));
     }
+    if (subjectList.isEmpty()) {
+      return null;
+    } else
+      return subjectList;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  @Override
+  public void save() {
+    this.prepare();
+    database.add(data);
+  }
 
-    protected void prepare() {
-        if (this.getId() == 0) {
-            // Auto incremenet
-            this.id = this.setId();
-        }
-        data.add(String.valueOf(this.getId()));
-        data.add(this.name);
-    }
+  @Override
+  public void update() {
+    this.delete();
+    database.add(data);
+  }
 
-    public Subject get(int id) {
-        List<String> result = database.retrieve(id);
-        // only if the object exists in the database
-        if (result != null) {
-            return new Subject(result);
-        }
-        return this;
+  @Override
+  public void delete() {
+    if (this.getId() != 0) {
+      database.delete(this.id);
     }
-
-    public static List<Subject> getAll() {
-        List<Subject> subjectList = new ArrayList<>();
-        List<List<String>> subjects = database.retrieveAll();
-        for (List<String> subject : subjects) {
-            subjectList.add(new Subject(subject));
-        }
-        if (subjectList.isEmpty()) {
-            return null;
-        } else
-            return subjectList;
-    }
-
-    @Override
-    public void save() {
-        this.prepare();
-        database.add(data);
-    }
-
-    @Override
-    public void update() {
-        this.delete();
-        database.add(data);
-    }
-
-    @Override
-    public void delete() {
-        if (this.getId() != 0) {
-            database.delete(this.id);
-        }
-    }
+  }
 
 }

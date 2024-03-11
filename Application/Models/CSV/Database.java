@@ -23,11 +23,10 @@ public class Database implements DatabaseInterface {
      * 
      * @param object
      */
-    public Database(Object object) {
-        String path = DatabaseSingleton.getInstance().getDatabasePath() + object.getClass().getSimpleName() + "s.csv";
+    public Database(Class<?> database) {
+        String path = DatabaseSingleton.getInstance().getDatabasePath() + database.getSimpleName() + "s.csv";
         this.database = new File(path);
         createDatabaseIfNotExists();
-        System.out.print(database);
     }
 
     public File getDatabase() {
