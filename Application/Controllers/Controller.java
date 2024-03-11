@@ -18,7 +18,7 @@ public class Controller {
 //called by the view
   //display teaching requirements
     public void displayTeachingRequirements() {
-        List<Requirement> requirements = r.getAll();
+        List<Requirement> requirements = Requirement.getAll();
 
         if (requirements != null && !requirements.isEmpty()) {
             System.out.println("Teaching Requirements for the Upcoming Term/Semester:");
@@ -34,7 +34,7 @@ public class Controller {
   	    }
     //Display teachers
     public void displayTeachers() {
-        List<Teacher> teachers = t.getAll();
+        List<Teacher> teachers = Teacher.getAll();
 
         if (teachers != null && !teachers.isEmpty()) {
             System.out.println("The available teachers Upcoming Term/Semester:");
@@ -62,19 +62,6 @@ public class Controller {
         }
         return new ArrayList<Teacher>();
     }
-
-
-    public Requirement getR() {
-		return r;
-	}
-
-
-
-	public void setR(Requirement r) {
-		this.r = r;
-	}
-
-
 
 	private List<Teacher> findAvailableTeacher(Requirement req) {
         List<Teacher> availableTeachers = new ArrayList<>(); 

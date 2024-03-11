@@ -88,7 +88,6 @@ public final class Teacher extends Data<Teacher> implements DataStorageInterface
     data.add(String.valueOf(this.subjectId));
     data.add(String.valueOf(this.experience));
     data.add(String.valueOf(this.requriementId));
-    this.setId();
   }
 
   public static Teacher get(int id) {
