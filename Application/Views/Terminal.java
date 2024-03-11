@@ -1,5 +1,12 @@
 package Application.Views;
 
 public class Terminal {
-//This is terminal 2 second
+	public static void main(String[] args) {
+//		boolean isActive = true;
+		while (ViewRequestsOperations.isClosed()) {
+			ViewRequestsOperations.MainMenu();
+		}
+
+	}
+
 }

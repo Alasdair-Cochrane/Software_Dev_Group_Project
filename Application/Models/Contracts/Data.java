@@ -9,7 +9,6 @@ abstract public class Data<T> {
     protected final static String errorMessage = "Not instantiated or not in the database";
     protected int id;
     protected List<String> data = new ArrayList<>();
-    protected static Database database;
 
     public Data() {
     }
@@ -25,13 +24,6 @@ abstract public class Data<T> {
         this.id = id;
     }
 
-    protected int setId() {
-        int dbCount = database.count();
-        if (dbCount == 0) {
-            return this.id = 1;
-        } else
-            return ++dbCount;
-    }
-
+    abstract protected int setId();
     abstract protected void prepare();
 }
