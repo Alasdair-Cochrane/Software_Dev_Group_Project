@@ -15,7 +15,7 @@ public final class Booking extends Data<Booking> implements DataStorageInterface
 	// teacher ID
 	private int teacherId;
 	private int subjectId;
-  private final static  Database database = new Database(Booking.class);
+    private final static  Database database = new Database(Booking.class);
 
 	public Booking() {
 	}

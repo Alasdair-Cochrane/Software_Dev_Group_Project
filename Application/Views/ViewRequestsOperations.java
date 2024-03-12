@@ -39,14 +39,24 @@ public class ViewRequestsOperations {
 	}
 	
 	protected static void BookTraining(Controller controller) {
-		System.out.println("You choosed Booktraining by typing their name and ID and Experience: ");
-		String name = InputUtil.enterValue("Teacher's name: ");
-		int subjectID = Integer.parseInt(InputUtil.enterValue("Teacher's subject ID: "));
-		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
 		
-		Teacher teacher = new Teacher(name, subjectID, experience);
+		System.out.println("You choosed Booktraining by typing their name and ID and Experience: ");
+		
+		String name = InputUtil.enterValue("Teacher's name: ");
+		
+		int TeachersId = Integer.parseInt(InputUtil.enterValue("Teacher's ID: "));
 	
-			controller.bookTraining(teacher);
+		int subjectID = Integer.parseInt(InputUtil.enterValue("Teacher's subject ID: "));
+		
+		String Date = InputUtil.enterValue("Enter Date: ");
+		
+		controller.addBookingToDatabase(TeachersId,subjectID,Date);
+		
+		System.out.println("Training booked successfully for the following details:");
+		   System.out.println("Teacher's Name: " + name);
+	    System.out.println("Teacher's ID: " + TeachersId);
+	    System.out.println("Subject ID: " + subjectID);
+	    System.out.println("Date: " + Date);
 	}
 
 //	Show Main manu that asks to enter your role

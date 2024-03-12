@@ -9,8 +9,10 @@ public class Controller {
 
   private Requirement r;
   private Teacher t;
+  private Booking booking;
 
   public Controller() {
+	  this.booking = new Booking();
   }
 
   // called by the view
@@ -118,6 +120,11 @@ public class Controller {
 
   public static List<Teacher> getAllTeachers() {
     return Teacher.getAll();
+  }
+  
+  public void addBookingToDatabase(int teacherId, int subjectId, String date) {
+      Booking newBooking = new Booking(teacherId, subjectId, date);
+      newBooking.save();
   }
 
 }

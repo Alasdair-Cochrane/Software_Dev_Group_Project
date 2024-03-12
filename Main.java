@@ -29,17 +29,20 @@ public class Main {
         Requirement requirement1 = new Requirement(2, 3, 4);
         Requirement requirement2 = new Requirement(7, 6, 4);
 
-        Booking booking = new Booking(1, 2, "11-22-3333");
-        Booking booking1 = new Booking(1, 2, "11-22-4444");
-        Booking booking2 = new Booking(1, 2, "11-22-4444");
-
+//        Booking booking = new Booking(1, 2, "11-22-3333");
+//        Booking booking1 = new Booking(1, 2, "11-22-4444");
+//        Booking booking2 = new Booking(1, 2, "11-22-4444");
+//
+//        
+//        tables.add(booking);
+////      tables.add(booking1);
+////      tables.add(booking2);
+        
         tables.add(teacher3);
         tables.add(teacher1);
         tables.add(teacher2);
 
-        tables.add(booking);
-        tables.add(booking1);
-        tables.add(booking2);
+//       
 
         tables.add(subject);
         tables.add(subject2);
