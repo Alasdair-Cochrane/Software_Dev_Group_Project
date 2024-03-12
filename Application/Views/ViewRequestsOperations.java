@@ -44,9 +44,16 @@ public class ViewRequestsOperations {
 		int subjectID = Integer.parseInt(InputUtil.enterValue("Teacher's subject ID: "));
 		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
 		
-		Teacher teacher = new Teacher(name, subjectID, experience);
-	
-			controller.bookTraining(teacher);
+		
+		
+		List<Teacher> teachersInDatabase = controller.getAllTeachers();
+		for (Teacher teacher: teachersInDatabase) {
+			if (teacher.getName().equals(name) && teacher.getSubjectId()== subjectID && teacher.getExperience() == experience) {
+				controller.bookTraining(teacher);
+				return;
+			}
+		}
+		System.out.println("Unable to book training. Teacher not found");			
 	}
 
 //	Show Main manu that asks to enter your role

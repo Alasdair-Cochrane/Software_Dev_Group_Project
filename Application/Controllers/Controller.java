@@ -49,7 +49,7 @@ public class Controller {
   }
 
   private void displayTeachers(Teacher teachers) {
-    System.out.println("Name: " + teachers.getName() + " |Experience: " + teachers.getExperience());
+    System.out.println("Name: " + teachers.getName() + " |Experience: " + teachers.getExperience() + "|Subject id" + teachers.getSubjectId());
 
   }
 
