@@ -6,7 +6,6 @@ import java.util.List;
 import Application.Models.*;
 
 public class Controller {
-	
 
   private Requirement r;
   private Teacher t;
@@ -111,16 +110,14 @@ public class Controller {
     } else {
       System.out.println("Unable to book training. Teacher not found");
     }
+  }
 
-    public void bookTraining(Teacher teacher) {
+  public static List<Requirement> getAllRequirement() {
+    return Requirement.getAll();
+  }
 
-    }
-    
-    public static List<Requirement> getAllRequirement(){
-    	return Requirement.getAll(); 	
-    }
-    public static List<Teacher> getAllTeachers(){
-    	return Teacher.getAll(); 	
-    }
+  public static List<Teacher> getAllTeachers() {
+    return Teacher.getAll();
+  }
 
 }
