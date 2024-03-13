@@ -23,6 +23,7 @@ public class ViewRequestsOperations {
 		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
 
 		controller.addNewRequirement(subjectID, hours, experience);
+		
 	}
 
 	// For both Course Director and administrator to request to add teacher
@@ -69,28 +70,47 @@ public class ViewRequestsOperations {
 
   }
 	
-	protected void BookTraining() {
-
+  protected void BookTraining() {
+		
 		System.out.println("You choosed Booktraining by typing their name and ID and Experience: ");
+		
 		String name = InputUtil.enterValue("Teacher's name: ");
+		
+		int TeachersId = Integer.parseInt(InputUtil.enterValue("Teacher's ID: "));
+	
 		int subjectID = Integer.parseInt(InputUtil.enterValue("Teacher's subject ID: "));
-		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
 		
-
-		List<Teacher> teachersInDatabase = controller.getAllTeachers();
-		for (Teacher teacher: teachersInDatabase) {
-			if (teacher.getId() == teacherID ) {
-				controller.bookTraining(teacher.getId(), teacher.getSubjectId(), date);
-				System.out.println("Training booked successfully for the following details:");
-				System.out.println("Teacher's Name: " + teacher.getName());
-			    System.out.println("Teacher's ID: " + teacher.getId());
-			    System.out.println("Subject ID: " + teacher.getSubjectId());
-			    System.out.println("Date: " + date);
-				return;
-			}
-		}
+		String Date = InputUtil.enterValue("Enter Date: ");
 		
-		System.out.println("Unable to book training. Teacher not found");			
+		
+	   List<Teacher> getTeacherName = Teacher.getAll();
+	   
+	   Boolean matchFound = false;
+	  
+	   
+	   for(Teacher teachers: getTeacherName) {
+		   
+			   if(teachers.getName().contains(name) && teachers.getId() == TeachersId ) { 
+				   
+				   controller.bookTraining(TeachersId,subjectID,Date);
+				   
+					matchFound = true;
+					
+					System.out.println("Training booked successfully for the following details:");
+					System.out.println("Teacher's Name: " + name);
+				    System.out.println("Teacher's ID: " + TeachersId);
+				    System.out.println("Subject ID: " + subjectID);
+				    System.out.println("Date: " + Date);
+				    	   
+			   }
+		   
+	   }
+	   
+	   if(matchFound !=true) {
+		   System.out.println("No Teacher found with this Details");
+	   }
+		
+	
 	}
 
 

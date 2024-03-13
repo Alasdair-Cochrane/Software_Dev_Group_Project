@@ -61,8 +61,8 @@ public class Controller {
 
   
   public void bookTraining(int teacherId, int subjectId, String date) {
-      Booking newBooking = new Booking(teacherId, subjectId, date);
-      newBooking.save();
+	  Booking newBooking = new Booking(teacherId, subjectId, date);
+	  newBooking.save();
   }
 
   public List<Requirement> getAllRequirements() {
@@ -72,10 +72,5 @@ public class Controller {
   public List<Teacher> getAllTeachers() {
     return Teacher.getAll();
   }
-
-  public void addBookingToDatabase(int teacherId, int subjectId, String date) {
-    Booking newBooking = new Booking(teacherId, subjectId, date);
-    newBooking.save();
-}
 
 }
