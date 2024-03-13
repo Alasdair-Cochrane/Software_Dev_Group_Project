@@ -40,9 +40,7 @@ public class Main {
         
         tables.add(teacher3);
         tables.add(teacher1);
-        tables.add(teacher2);
-
-//       
+        tables.add(teacher2);      
 
         tables.add(subject);
         tables.add(subject2);

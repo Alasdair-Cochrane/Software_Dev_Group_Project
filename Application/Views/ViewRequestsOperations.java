@@ -50,13 +50,33 @@ public class ViewRequestsOperations {
 		
 		String Date = InputUtil.enterValue("Enter Date: ");
 		
-		controller.addBookingToDatabase(TeachersId,subjectID,Date);
 		
-		System.out.println("Training booked successfully for the following details:");
-		   System.out.println("Teacher's Name: " + name);
-	    System.out.println("Teacher's ID: " + TeachersId);
-	    System.out.println("Subject ID: " + subjectID);
-	    System.out.println("Date: " + Date);
+	   List<Teacher> getTeacherName = Teacher.getAll();
+	   
+	   Boolean matchFound = false;
+	  
+	   
+	   for(Teacher teachers: getTeacherName) {
+		   
+			   if(teachers.getName().contains(name) && teachers.getId() == TeachersId ) { 
+				   
+					controller.addBookingToDatabase(TeachersId,subjectID,Date);
+					matchFound = true;
+					
+					System.out.println("Training booked successfully for the following details:");
+					System.out.println("Teacher's Name: " + name);
+				    System.out.println("Teacher's ID: " + TeachersId);
+				    System.out.println("Subject ID: " + subjectID);
+				    System.out.println("Date: " + Date);
+				    	   
+			   }
+		   
+	   }
+	   if(matchFound !=true) {
+		   System.out.println("No Teacher found with this Details");
+	   }
+		
+	
 	}
 
 //	Show Main manu that asks to enter your role
