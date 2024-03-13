@@ -7,8 +7,7 @@ import Application.Models.*;
 
 public class Controller {
 
-  private Requirement r;
-  private Teacher t;
+ 
 
   public Controller() {
   }
@@ -67,11 +66,11 @@ public class Controller {
       newBooking.save();
   }
 
-  public static List<Requirement> getAllRequirement() {
+  public  List<Requirement> getAllRequirement() {
     return Requirement.getAll();
   }
 
-  public static List<Teacher> getAllTeachers() {
+  public List<Teacher> getAllTeachers() {
     return Teacher.getAll();
   }
 

@@ -7,28 +7,38 @@ import Application.Models.Requirement;
 import Application.Models.Teacher;
 
 public class ViewRequestsOperations {
-	private static boolean isActive = true;
+	private boolean isActive = true;
+	private Controller controller;
+
+	public ViewRequestsOperations(Controller controller){
+		this.controller = controller;
+	}
 
 // For Course Director to request to add requirements
-	protected static void requestAddRequirement(Controller controller) {
+	protected void requestAddRequirement() {
 		System.out.println("You choosed to add requirement, please follow the instructions: ");
 		int subjectID = Integer.parseInt(InputUtil.enterValue("Enter SubjectID: "));
 		int hours = Integer.parseInt(InputUtil.enterValue("Enter required hours: "));
 		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
 		controller.addNewRequirement(subjectID, hours, experience);
+		System.out.print("Requirement have been added succesfully");
+		return;
 	}
 
 	// For both Course Director and administrator to request to add teacher
-	protected static void requestAddTeacher(Controller controller) {
+	protected void requestAddTeacher() {
 		System.out.println("You choosed add teacher option. For adding new teacher please specify teacher details: ");
 		String name = InputUtil.enterValue("Teacher's name: ");
 		int subjectID = Integer.parseInt(InputUtil.enterValue("Teacher's subject ID: "));
 		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
+		
 		controller.addNewTeacher(name, subjectID, experience);
+		System.out.println("Teacher has been added sucessfully");
+		return;
 	}
 
 //	For both Course Director and administrator to request to get all list of matched teachers
-	protected static void requestGetListOfMachedTeachers(Controller controller) {
+	protected void requestGetListOfMatchedTeachers() {
 		System.out.println("List of matched teachers");
 		String subjectID = InputUtil.enterValue("Enter SubjectID: ");
 		List<Teacher> listOfMatchedTeachers = controller.matchTeacherWithRequirement(subjectID);
@@ -36,10 +46,12 @@ public class ViewRequestsOperations {
 		for (Teacher teacher : listOfMatchedTeachers) {
 			System.out.println(order++ + ". " + teacher.getName() + ". taught subject id is " + teacher.getSubjectId()
 					+ " and has " + teacher.getExperience() + " years experience");
+			return;
 		}
+	
 	}
 	
-	protected static void displayBookedTraining(Controller controller) {
+	protected void displayBookedTraining() {
 		System.out.println("You choosed Booktraining by typing the teachers ID and date: ");
 		
 		int teacherID = Integer.parseInt(InputUtil.enterValue("Enter teacher ID: "));
@@ -61,7 +73,7 @@ public class ViewRequestsOperations {
 		System.out.println("Unable to book training. Teacher not found");			
 	}
 	
-	 public static void displayTeachingRequirements(Controller controller) {
+	  public void displayTeachingRequirements() {
 		    List<Requirement> requirements = controller.getAllRequirement();
 
 		    if (requirements != null && !requirements.isEmpty()) {
@@ -74,54 +86,47 @@ public class ViewRequestsOperations {
 		    }
 		  }
 
-		  private static void displayTeachingRequirement(Requirement requirement) {
+		  private void displayTeachingRequirement(Requirement requirement) {
 		    System.out.println("Subject ID: " + requirement.getSubjectId() + " | Hours: " + requirement.getHours()
 		        + " |Minimum Experience: " + requirement.getMinimumExperience());
 
 		  }
 
 		  // Display teachers
-		  public static void displayTeachers(Controller ccontroller) {
-		    List<Teacher> teachers = Controller.getAllTeachers();
+		  protected void displayTeachers() {
+				List<Teacher> teachers = controller.getAllTeachers();
+			
+				if (teachers != null && !teachers.isEmpty()) {
+				  System.out.println("The available teachers Upcoming Term/Semester:");
+				  for (Teacher teacher : teachers) {
+					displayTeacher(teacher);
+				  }
+				} else {
+				  System.out.println("No available teachers");
+				}
 
-		    if (teachers != null && !teachers.isEmpty()) {
-		      System.out.println("The available teachers Upcoming Term/Semester:");
-		      for (Teacher teacher : teachers) {
-		        displayTeachers(teacher);
-		      }
-		    } else {
-		      System.out.println("No available teachers");
-		    }
-		  }
-
-		  private static void displayTeachers(Teacher teachers) {
-		    System.out.println("Name: " + teachers.getName() + " |Experience: " + teachers.getExperience() + "|Subject id" + teachers.getSubjectId() + " teacher Id" + teachers.getId());
-
-		  }
+			  }
+			
+			  private void displayTeacher(Teacher teachers) {
+				System.out.println("Name: " + teachers.getName() + " |Experience: " + teachers.getExperience() + "|Subject id" + teachers.getSubjectId());
+			
+			  }
+			  
 
 //	Show Main manu that asks to enter your role
-	protected static void MainMenu() {
-		Controller controller = new Controller();
-		String role = InputUtil.enterValue("What is your role: ").toLowerCase();
 
-		if (role.equals("director")) {
-			DirectorMenu.showDirectorMenuList(controller);
-
-		} else if (role.equals("administrator")) {
-			AdministratorMenu.showAdministratorMenuList(controller);
-		}
-	}
 	
 	
-
+	
 //	To close the app
-	protected static void closeApp() {
+	protected  void closeApp() {
 		isActive = false;
 		System.out.println("Application is closed");
 	}
 
-	protected static boolean isClosed() {
+	protected boolean isOpen() {
 		return isActive;
 	}
+
 
 }
