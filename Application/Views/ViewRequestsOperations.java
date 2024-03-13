@@ -76,16 +76,23 @@ public class ViewRequestsOperations {
 		int subjectID = Integer.parseInt(InputUtil.enterValue("Teacher's subject ID: "));
 		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
 		
+
 		List<Teacher> teachersInDatabase = controller.getAllTeachers();
 		for (Teacher teacher: teachersInDatabase) {
-			if (teacher.getName().equals(name) && teacher.getSubjectId()== subjectID && teacher.getExperience() == experience) {
-				controller.bookTraining(teacher);
+			if (teacher.getId() == teacherID ) {
+				controller.bookTraining(teacher.getId(), teacher.getSubjectId(), date);
+				System.out.println("Training booked successfully for the following details:");
+				System.out.println("Teacher's Name: " + teacher.getName());
+			    System.out.println("Teacher's ID: " + teacher.getId());
+			    System.out.println("Subject ID: " + teacher.getSubjectId());
+			    System.out.println("Date: " + date);
 				return;
 			}
 		}
 		
 		System.out.println("Unable to book training. Teacher not found");			
 	}
+
 
 	protected void displayTeachers() {
 		List<Teacher> teachers = controller.getAllTeachers();
@@ -98,12 +105,14 @@ public class ViewRequestsOperations {
 		} else {
 		  System.out.println("No available teachers");
 		}
+
 	  }
 	
 	  private void displayTeacher(Teacher teachers) {
 		System.out.println("Name: " + teachers.getName() + " |Experience: " + teachers.getExperience() + "|Subject id" + teachers.getSubjectId());
 	
 	  }
+
 
 //	To close the app
 	protected  void closeApp() {

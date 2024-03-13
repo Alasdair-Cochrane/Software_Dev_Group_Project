@@ -21,12 +21,16 @@ public class AdministratorMenu extends Menu{
 		case 1: {
 			System.out.println("View list of all requirement");
 //			controller.  => getAll method also should be implemented in the Controller class
+
 			view.displayTeachingRequirements();
+
 			break;
 		}
 		case 2: {
 			System.out.println("View list of all teachers");
+
 			view.displayTeachers();
+
 			break;
 		}
 		
@@ -42,8 +46,8 @@ public class AdministratorMenu extends Menu{
 		case 5: {
 			System.out.println("Booking training");
 //		;
-			
 			view.BookTraining();
+
 			break;
 		}
 		case 6: {
