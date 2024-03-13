@@ -1,6 +1,15 @@
 package Application.Views;
 
 
-public interface Menu {
-    public void showMenuList();  
+public abstract class Menu {
+
+    protected ViewRequestsOperations view;
+
+	public Menu(ViewRequestsOperations view)
+	{
+		this.view = view;
+	}
+
+
+    public abstract void showMenuList();  
 }

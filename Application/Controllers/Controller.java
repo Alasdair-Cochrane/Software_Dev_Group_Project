@@ -21,6 +21,7 @@ public class Controller {
     return new ArrayList<Teacher>();
   }
 
+  
   private List<Teacher> findAvailableTeacher(Requirement req) {
     List<Teacher> availableTeachers = new ArrayList<>();
     List<Teacher> teachers = Teacher.getAll();
@@ -74,7 +75,7 @@ public class Controller {
   public List<Teacher> getAllTeachers() {
     return Teacher.getAll();
   }
-  
+
   public void addBookingToDatabase(int teacherId, int subjectId, String date) {
     Booking newBooking = new Booking(teacherId, subjectId, date);
     newBooking.save();

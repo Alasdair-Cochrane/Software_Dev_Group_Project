@@ -1,12 +1,11 @@
 package Application.Views;
 
 
-public class DirectorMenu implements Menu{
+public class DirectorMenu extends Menu{
 
-	private ViewRequestsOperations view;
 
 	public DirectorMenu(ViewRequestsOperations view){
-		this.view = view;
+		super(view);
 	}
 //	//	To implement operation based on director selection	
 	public void showMenuList() {

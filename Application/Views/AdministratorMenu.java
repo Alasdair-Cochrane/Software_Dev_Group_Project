@@ -1,11 +1,11 @@
 package Application.Views;
-public class AdministratorMenu implements Menu{
 
-	private ViewRequestsOperations view;
+public class AdministratorMenu extends Menu{
+
 
 	public AdministratorMenu(ViewRequestsOperations view)
 	{
-		this.view = view;
+		super(view);
 	}
 
 //	To implement operation based on administrator selection
@@ -15,8 +15,7 @@ public class AdministratorMenu implements Menu{
 
 		switch (operation) {
 		case 0: {
-			return;
-			
+			return;			
 		}
 		//methods gives an error when it tries to display the database -Nduka
 		case 1: {
