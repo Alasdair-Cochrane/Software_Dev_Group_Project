@@ -6,25 +6,24 @@ import java.util.List;
 import Application.Models.*;
 
 public class Controller {
-
-  private Requirement r;
-  private Teacher t;
-
+  
   public Controller() {
   }
 
-  public List<Teacher> matchTeacherWithRequirement(String input) {
-    int inputSubjectID = Integer.parseInt(input);
+
+  public List<Teacher> matchTeacherWithRequirement(int subjectID) {
+
     List<Requirement> requirements = Requirement.getAll();
 
     for (Requirement r : requirements) {
-      if (r.getSubjectId() == inputSubjectID) {
+      if (r.getSubjectId() == subjectID) {
         return findAvailableTeacher(r);
       }
     }
     return new ArrayList<Teacher>();
   }
 
+  
   private List<Teacher> findAvailableTeacher(Requirement req) {
     List<Teacher> availableTeachers = new ArrayList<>();
     List<Teacher> teachers = Teacher.getAll();
@@ -41,7 +40,6 @@ public class Controller {
     if (req.getSubjectId() == teacher.getSubjectId() &&
         teacher.getExperience() >= req.getMinimumExperience()) {
       return true;
-
     }
     return false;
   }
@@ -67,12 +65,17 @@ public class Controller {
       newBooking.save();
   }
 
-  public static List<Requirement> getAllRequirement() {
+  public List<Requirement> getAllRequirements() {
     return Requirement.getAll();
   }
 
-  public static List<Teacher> getAllTeachers() {
+  public List<Teacher> getAllTeachers() {
     return Teacher.getAll();
   }
+
+  public void addBookingToDatabase(int teacherId, int subjectId, String date) {
+    Booking newBooking = new Booking(teacherId, subjectId, date);
+    newBooking.save();
+}
 
 }
