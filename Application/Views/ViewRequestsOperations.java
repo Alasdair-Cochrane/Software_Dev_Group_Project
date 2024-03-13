@@ -83,12 +83,12 @@ public class ViewRequestsOperations {
 		String Date = InputUtil.enterValue("Enter Date: ");
 		
 		
-	   List<Teacher> getTeacherName = Teacher.getAll();
+	   List<Teacher> getTeacherInfo= Teacher.getAll();
 	   
 	   Boolean matchFound = false;
 	  
 	   
-	   for(Teacher teachers: getTeacherName) {
+	   for(Teacher teachers: getTeacherInfo) {
 		   
 			   if(teachers.getName().contains(name) && teachers.getId() == TeachersId ) { 
 				   
