@@ -2,12 +2,10 @@ package Application.Views;
 
 import Application.Controllers.Controller;
 
-public class AdministratorMenu {
-
-	static AdministratorMenu instanceAdministratorMenu;;
-
+public class AdministratorMenu implements Menu{
+	
 //	To implement operation based on administrator selection
-	private void menuList(Controller controller) {
+	public void showMenuList(Controller controller) {
 		System.out.println(menuListForAdministrator());
 		int operation = Integer.parseInt(InputUtil.enterValue("Choose operation by selecting appropriate value: "));
 
@@ -54,19 +52,8 @@ public class AdministratorMenu {
 		}
 	}
 
-//	Middle layer method for view function to call the "menuList" method to make selection for operation
-	public static void showAdministratorMenuList(Controller controller) {
-		if (instanceAdministratorMenu == null) {
-			instanceAdministratorMenu = new AdministratorMenu();
-			instanceAdministratorMenu.menuList(controller);
-		} else {
-			instanceAdministratorMenu.menuList(controller);
-
-		}
-	}
-
 	// List of menu elements
-	private static String menuListForAdministrator() {
+	private String menuListForAdministrator() {
 		return ("You are in the Administrator panel: " + "\n0. Go to Main menu" + "\n1. View list of all requirement"
 				+ "\n2. View list of all teachers" + "\n3. Add new teacher" + "\n4. List of macthed teachers"
 				+ "\n5.Booking training" + "\n6. Close the app");

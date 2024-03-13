@@ -1,16 +1,11 @@
 package Application.Views;
-
-import java.util.List;
-
 import Application.Controllers.Controller;
-import Application.Models.*;
 
-public class DirectorMenu {
-	static DirectorMenu instanceDirectorMenu;
-	
+
+public class DirectorMenu implements Menu{
 
 //	//	To implement operation based on director selection	
-	private void menuList(Controller controller) {
+	public void showMenuList(Controller controller) {
 
 		System.out.println(menuListForDirector());
 		int operation = Integer.parseInt(InputUtil.enterValue("Choose operation by selecting appropriate value: "));
@@ -57,23 +52,10 @@ public class DirectorMenu {
 
 		}
 	}
-
-//	Middle layer method for view function to call the "menuList" method to make selection for operation
-	protected static void showDirectorMenuList(Controller controller) {
-		if (instanceDirectorMenu == null) {
-			instanceDirectorMenu = new DirectorMenu();
-			instanceDirectorMenu.menuList(controller);
-		} else {
-			instanceDirectorMenu.menuList(controller);
-			;
-		}
-	}
-
 	// List of menu elements for director
-	private static String menuListForDirector() {
+	private String menuListForDirector() {
 		return ("You are in the Director panel: " + "\n0 Go to Main menu" + "\n1. Add requirement"
 				+ "\n2. View list of all requirement" + "\n3. View list of all teachers" + "\n4. Add new teacher"
 				+ "\n5. List of macthed teachers" + "\n6. Close the app");
 	}
-
 }

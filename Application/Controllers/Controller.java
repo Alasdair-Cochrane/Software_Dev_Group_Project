@@ -6,10 +6,7 @@ import java.util.List;
 import Application.Models.*;
 
 public class Controller {
-
-  private Requirement r;
-  private Teacher t;
-
+  
   public Controller() {
   }
 
@@ -53,12 +50,11 @@ public class Controller {
 
   }
 
-  public List<Teacher> matchTeacherWithRequirement(String input) {
-    int inputSubjectID = Integer.parseInt(input);
+  public List<Teacher> matchTeacherWithRequirement(int subjectID) {
     List<Requirement> requirements = Requirement.getAll();
 
     for (Requirement r : requirements) {
-      if (r.getSubjectId() == inputSubjectID) {
+      if (r.getSubjectId() == subjectID) {
         return findAvailableTeacher(r);
       }
     }

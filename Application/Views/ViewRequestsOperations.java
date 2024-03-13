@@ -29,7 +29,8 @@ public class ViewRequestsOperations {
 //	For both Course Director and administrator to request to get all list of matched teachers
 	protected static void requestGetListOfMachedTeachers(Controller controller) {
 		System.out.println("List of matched teachers");
-		String subjectID = InputUtil.enterValue("Enter SubjectID: ");
+		String subjectIDStr = InputUtil.enterValue("Enter SubjectID: ");
+		int subjectID = Integer.parseInt(subjectIDStr);
 		List<Teacher> listOfMatchedTeachers = controller.matchTeacherWithRequirement(subjectID);
 		int order = 1;
 		for (Teacher teacher : listOfMatchedTeachers) {
@@ -44,8 +45,6 @@ public class ViewRequestsOperations {
 		int subjectID = Integer.parseInt(InputUtil.enterValue("Teacher's subject ID: "));
 		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
 		
-		
-		
 		List<Teacher> teachersInDatabase = controller.getAllTeachers();
 		for (Teacher teacher: teachersInDatabase) {
 			if (teacher.getName().equals(name) && teacher.getSubjectId()== subjectID && teacher.getExperience() == experience) {
@@ -56,16 +55,25 @@ public class ViewRequestsOperations {
 		System.out.println("Unable to book training. Teacher not found");			
 	}
 
-//	Show Main manu that asks to enter your role
+//	Show Main manu that asks to enter your role ; creates role based on entered value
+//	RoleMenu creation could be seperated out into factory class if there were more roles
 	protected static void MainMenu() {
 		Controller controller = new Controller();
 		String role = InputUtil.enterValue("What is your role: ").toLowerCase();
-
+		Menu roleMenu = null;
+		
 		if (role.equals("director")) {
-			DirectorMenu.showDirectorMenuList(controller);
-
-		} else if (role.equals("administrator")) {
-			AdministratorMenu.showAdministratorMenuList(controller);
+			roleMenu = new DirectorMenu();
+		} 
+		else if (role.equals("administrator") || role.equals("admin")) {
+			roleMenu = new AdministratorMenu();
+		}
+		if (roleMenu != null) {
+			roleMenu.showMenuList(controller);
+		}
+		else{
+			System.out.println("Unrecognsied role. Please re-enter");
+			MainMenu();
 		}
 	}
 
