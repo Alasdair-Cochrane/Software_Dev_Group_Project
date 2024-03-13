@@ -10,45 +10,45 @@ public class Controller {
   public Controller() {
   }
 
-  // called by the view
-  // display teaching requirements
-  public void displayTeachingRequirements() {
-    List<Requirement> requirements = Requirement.getAll();
+  // // called by the view
+  // // display teaching requirements
+  // public void displayTeachingRequirements() {
+  //   List<Requirement> requirements = Requirement.getAll();
 
-    if (requirements != null && !requirements.isEmpty()) {
-      System.out.println("Teaching Requirements for the Upcoming Term/Semester:");
-      for (Requirement requirement : requirements) {
-        displayTeachingRequirement(requirement);
-      }
-    } else {
-      System.out.println("No teaching requirements available for the upcoming term/semester.");
-    }
-  }
+  //   if (requirements != null && !requirements.isEmpty()) {
+  //     System.out.println("Teaching Requirements for the Upcoming Term/Semester:");
+  //     for (Requirement requirement : requirements) {
+  //       displayTeachingRequirement(requirement);
+  //     }
+  //   } else {
+  //     System.out.println("No teaching requirements available for the upcoming term/semester.");
+  //   }
+  // }
 
-  private void displayTeachingRequirement(Requirement requirement) {
-    System.out.println("Subject ID: " + requirement.getSubjectId() + " | Hours: " + requirement.getHours()
-        + " |Minimum Experience: " + requirement.getMinimumExperience());
+  // private void displayTeachingRequirement(Requirement requirement) {
+  //   System.out.println("Subject ID: " + requirement.getSubjectId() + " | Hours: " + requirement.getHours()
+  //       + " |Minimum Experience: " + requirement.getMinimumExperience());
 
-  }
+  // }
 
   // Display teachers
-  public void displayTeachers() {
-    List<Teacher> teachers = Teacher.getAll();
+  // public void displayTeachers() {
+  //   List<Teacher> teachers = Teacher.getAll();
 
-    if (teachers != null && !teachers.isEmpty()) {
-      System.out.println("The available teachers Upcoming Term/Semester:");
-      for (Teacher teacher : teachers) {
-        displayTeachers(teacher);
-      }
-    } else {
-      System.out.println("No available teachers");
-    }
-  }
+  //   if (teachers != null && !teachers.isEmpty()) {
+  //     System.out.println("The available teachers Upcoming Term/Semester:");
+  //     for (Teacher teacher : teachers) {
+  //       displayTeachers(teacher);
+  //     }
+  //   } else {
+  //     System.out.println("No available teachers");
+  //   }
+  // }
 
-  private void displayTeachers(Teacher teachers) {
-    System.out.println("Name: " + teachers.getName() + " |Experience: " + teachers.getExperience() + "|Subject id" + teachers.getSubjectId());
+  // private void displayTeachers(Teacher teachers) {
+  //   System.out.println("Name: " + teachers.getName() + " |Experience: " + teachers.getExperience() + "|Subject id" + teachers.getSubjectId());
 
-  }
+  // }
 
   public List<Teacher> matchTeacherWithRequirement(int subjectID) {
     List<Requirement> requirements = Requirement.getAll();
@@ -77,7 +77,6 @@ public class Controller {
     if (req.getSubjectId() == teacher.getSubjectId() &&
         teacher.getExperience() >= req.getMinimumExperience()) {
       return true;
-
     }
     return false;
   }
@@ -108,11 +107,11 @@ public class Controller {
     }
   }
 
-  public static List<Requirement> getAllRequirement() {
+  public List<Requirement> getAllRequirements() {
     return Requirement.getAll();
   }
 
-  public static List<Teacher> getAllTeachers() {
+  public List<Teacher> getAllTeachers() {
     return Teacher.getAll();
   }
 

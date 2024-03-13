@@ -3,48 +3,55 @@ package Application.Views;
 import Application.Controllers.Controller;
 
 public class AdministratorMenu implements Menu{
-	
+
+	private ViewRequestsOperations view;
+
+	public AdministratorMenu(ViewRequestsOperations view)
+	{
+		this.view = view;
+	}
+
 //	To implement operation based on administrator selection
-	public void showMenuList(Controller controller) {
+	public void showMenuList() {
 		System.out.println(menuListForAdministrator());
 		int operation = Integer.parseInt(InputUtil.enterValue("Choose operation by selecting appropriate value: "));
 
 		switch (operation) {
 		case 0: {
-			ViewRequestsOperations.MainMenu();
-			break;
+			return;
+			
 		}
 		//methods gives an error when it tries to display the database -Nduka
 		case 1: {
 			System.out.println("View list of all requirement");
 //			controller.  => getAll method also should be implemented in the Controller class
-			controller.displayTeachingRequirements();
+			view.displayTeachingRequirements();
 			break;
 		}
 		case 2: {
 			System.out.println("View list of all teachers");
-			controller.displayTeachers();
+			view.displayTeachers();
 			break;
 		}
 		
 		//This method gives an error when it tries to add a teacher to the database -Nduka
 		case 3: {
-			ViewRequestsOperations.requestAddTeacher(controller);
+			view.requestAddTeacher();
 			break;
 		}
 		case 4: {
-			ViewRequestsOperations.requestGetListOfMachedTeachers(controller);
+			view.requestGetListOfMachedTeachers();
 			break;
 		}
 		case 5: {
 			System.out.println("Booking training");
 //		;
 			
-			ViewRequestsOperations.BookTraining(controller);
+			view.BookTraining();
 			break;
 		}
 		case 6: {
-			ViewRequestsOperations.closeApp();
+			view.closeApp();
 			break;
 		}
 		default:
@@ -58,4 +65,6 @@ public class AdministratorMenu implements Menu{
 				+ "\n2. View list of all teachers" + "\n3. Add new teacher" + "\n4. List of macthed teachers"
 				+ "\n5.Booking training" + "\n6. Close the app");
 	}
+
+
 }

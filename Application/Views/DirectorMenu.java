@@ -1,49 +1,51 @@
 package Application.Views;
-import Application.Controllers.Controller;
 
 
 public class DirectorMenu implements Menu{
 
+	private ViewRequestsOperations view;
+
+	public DirectorMenu(ViewRequestsOperations view){
+		this.view = view;
+	}
 //	//	To implement operation based on director selection	
-	public void showMenuList(Controller controller) {
+	public void showMenuList() {
 
 		System.out.println(menuListForDirector());
 		int operation = Integer.parseInt(InputUtil.enterValue("Choose operation by selecting appropriate value: "));
 		switch (operation) {
 		case 0: {
-			ViewRequestsOperations.MainMenu();
-			break;
+			return;
 		}
 		case 1: {
-			ViewRequestsOperations.requestAddRequirement(controller);
+			view.requestAddRequirement();
 			break;
 		}
 		case 2: {
 			System.out.println("View list of all requirement");
 //			controller.  => getAll method also should be implemented in the Controller class
 			//method to display teaching requiremenrts
-			controller.displayTeachingRequirements();
+			view.displayTeachingRequirements();
 			
 			break;
 		}
 		case 3: {
 			System.out.println("View list of all teachers");
-//			controller we don't have method to get list of all teachers existed in our database;
 			//method to display teachers
-			controller.displayTeachers();
+			view.displayTeachers();
 			break;
 		}
 		case 4: {
-			ViewRequestsOperations.requestAddTeacher(controller);
+			view.requestAddTeacher();
 			break;
 		}
 		case 5: {
-			ViewRequestsOperations.requestGetListOfMachedTeachers(controller);
+			view.requestGetListOfMachedTeachers();
 			break;
 		}
 
 		case 6: {
-			ViewRequestsOperations.closeApp();
+			view.closeApp();
 			break;
 		}
 		default: {
