@@ -6,7 +6,6 @@ public class Terminal {
 	public static void main(String[] args) {
 
 		ViewRequestsOperations applicationView = new ViewRequestsOperations(new Controller());
-//		boolean isActive = true;
 		while (applicationView.isOpen()) {
 			mainMenu(applicationView);
 		}

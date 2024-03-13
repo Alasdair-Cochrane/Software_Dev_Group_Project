@@ -1,7 +1,4 @@
 package Application.Views;
-
-import Application.Controllers.Controller;
-
 public class AdministratorMenu implements Menu{
 
 	private ViewRequestsOperations view;

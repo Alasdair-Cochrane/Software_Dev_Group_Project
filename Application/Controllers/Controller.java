@@ -10,8 +10,6 @@ public class Controller {
   public Controller() {
   }
 
-
-
   public List<Teacher> matchTeacherWithRequirement(int subjectID) {
     List<Requirement> requirements = Requirement.getAll();
 
@@ -76,5 +74,10 @@ public class Controller {
   public List<Teacher> getAllTeachers() {
     return Teacher.getAll();
   }
+  
+  public void addBookingToDatabase(int teacherId, int subjectId, String date) {
+    Booking newBooking = new Booking(teacherId, subjectId, date);
+    newBooking.save();
+}
 
 }
