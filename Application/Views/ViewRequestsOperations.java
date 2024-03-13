@@ -3,6 +3,7 @@ package Application.Views;
 import java.util.List;
 
 import Application.Controllers.Controller;
+import Application.Models.Requirement;
 import Application.Models.Teacher;
 
 public class ViewRequestsOperations {
@@ -38,23 +39,65 @@ public class ViewRequestsOperations {
 		}
 	}
 	
-	protected static void BookTraining(Controller controller) {
-		System.out.println("You choosed Booktraining by typing their name and ID and Experience: ");
-		String name = InputUtil.enterValue("Teacher's name: ");
-		int subjectID = Integer.parseInt(InputUtil.enterValue("Teacher's subject ID: "));
-		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
+	protected static void displayBookedTraining(Controller controller) {
+		System.out.println("You choosed Booktraining by typing the teachers ID and date: ");
 		
+		int teacherID = Integer.parseInt(InputUtil.enterValue("Enter teacher ID: "));
+		String date = InputUtil.enterValue("Enter Date: ");
 		
 		
 		List<Teacher> teachersInDatabase = controller.getAllTeachers();
 		for (Teacher teacher: teachersInDatabase) {
-			if (teacher.getName().equals(name) && teacher.getSubjectId()== subjectID && teacher.getExperience() == experience) {
-				controller.bookTraining(teacher);
+			if (teacher.getId() == teacherID ) {
+				controller.bookTraining(teacher.getId(), teacher.getSubjectId(), date);
+				System.out.println("Training booked successfully for the following details:");
+				System.out.println("Teacher's Name: " + teacher.getName());
+			    System.out.println("Teacher's ID: " + teacher.getId());
+			    System.out.println("Subject ID: " + teacher.getSubjectId());
+			    System.out.println("Date: " + date);
 				return;
 			}
 		}
 		System.out.println("Unable to book training. Teacher not found");			
 	}
+	
+	 public static void displayTeachingRequirements(Controller controller) {
+		    List<Requirement> requirements = controller.getAllRequirement();
+
+		    if (requirements != null && !requirements.isEmpty()) {
+		      System.out.println("Teaching Requirements for the Upcoming Term/Semester:");
+		      for (Requirement requirement : requirements) {
+		        displayTeachingRequirement(requirement);
+		      }
+		    } else {
+		      System.out.println("No teaching requirements available for the upcoming term/semester.");
+		    }
+		  }
+
+		  private static void displayTeachingRequirement(Requirement requirement) {
+		    System.out.println("Subject ID: " + requirement.getSubjectId() + " | Hours: " + requirement.getHours()
+		        + " |Minimum Experience: " + requirement.getMinimumExperience());
+
+		  }
+
+		  // Display teachers
+		  public static void displayTeachers(Controller ccontroller) {
+		    List<Teacher> teachers = Controller.getAllTeachers();
+
+		    if (teachers != null && !teachers.isEmpty()) {
+		      System.out.println("The available teachers Upcoming Term/Semester:");
+		      for (Teacher teacher : teachers) {
+		        displayTeachers(teacher);
+		      }
+		    } else {
+		      System.out.println("No available teachers");
+		    }
+		  }
+
+		  private static void displayTeachers(Teacher teachers) {
+		    System.out.println("Name: " + teachers.getName() + " |Experience: " + teachers.getExperience() + "|Subject id" + teachers.getSubjectId() + " teacher Id" + teachers.getId());
+
+		  }
 
 //	Show Main manu that asks to enter your role
 	protected static void MainMenu() {
@@ -68,6 +111,8 @@ public class ViewRequestsOperations {
 			AdministratorMenu.showAdministratorMenuList(controller);
 		}
 	}
+	
+	
 
 //	To close the app
 	protected static void closeApp() {

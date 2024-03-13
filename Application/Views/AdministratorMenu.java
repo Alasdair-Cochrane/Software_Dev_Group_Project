@@ -20,12 +20,12 @@ public class AdministratorMenu {
 		case 1: {
 			System.out.println("View list of all requirement");
 //			controller.  => getAll method also should be implemented in the Controller class
-			controller.displayTeachingRequirements();
+			ViewRequestsOperations.displayTeachingRequirements(controller);
 			break;
 		}
 		case 2: {
 			System.out.println("View list of all teachers");
-			controller.displayTeachers();
+			ViewRequestsOperations.displayTeachers(controller);
 			break;
 		}
 		
@@ -42,7 +42,7 @@ public class AdministratorMenu {
 			System.out.println("Booking training");
 //		;
 			
-			ViewRequestsOperations.BookTraining(controller);
+			ViewRequestsOperations.displayBookedTraining(controller);
 			break;
 		}
 		case 6: {
