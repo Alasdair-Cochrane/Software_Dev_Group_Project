@@ -21,7 +21,7 @@ public class ViewRequestsOperations {
 		int hours = Integer.parseInt(InputUtil.enterValue("Enter required hours: "));
 		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
 		controller.addNewRequirement(subjectID, hours, experience);
-		System.out.print("Requirement have been added succesfully");
+		System.out.println("Requirement have been added succesfully");
 		return;
 	}
 
@@ -33,9 +33,11 @@ public class ViewRequestsOperations {
 		int experience = Integer.parseInt(InputUtil.enterValue("Teacher's Experience: "));
 		
 		controller.addNewTeacher(name, subjectID, experience);
-		System.out.println("Teacher has been added sucessfully");
+		System.out.println("Teacher has been added sucessfully\n");
+		
 		return;
 	}
+	
 
 //	For both Course Director and administrator to request to get all list of matched teachers
 	protected void requestGetListOfMatchedTeachers() {
@@ -112,11 +114,6 @@ public class ViewRequestsOperations {
 			
 			  }
 			  
-
-//	Show Main manu that asks to enter your role
-
-	
-	
 	
 //	To close the app
 	protected  void closeApp() {

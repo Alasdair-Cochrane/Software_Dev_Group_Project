@@ -17,7 +17,7 @@ public class Terminal {
 //Displays the appropriate options menu depending on the user-role
 //If there were more roles it could use a seperate factory class instead to instantiate the correct menu object
 	private static void mainMenu(ViewRequestsOperations view) {
-		String role = InputUtil.enterValue("What is your role: ").toLowerCase();
+		String role = InputUtil.enterValue("Welcome to the File System. What is your role: ").toLowerCase();
 		Menu roleMenu = null;
 		
 		if (role.equals("director")) {
